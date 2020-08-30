@@ -1,0 +1,55 @@
+﻿{
+   "ContextClassName": "NorthwindContext",
+   "ContextNamespace": null,
+   "DefaultDacpacSchema": null,
+   "IncludeConnectionString": true,
+   "ModelNamespace": null,
+   "OutputContextPath": "ApplicationDBContext",
+   "OutputPath": "Models",
+   "ProjectRootNamespace": "OMSWebApp.Server",
+   "SelectedHandlebarsLanguage": 0,
+   "SelectedToBeGenerated": 0,
+   "Tables": [
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[Categories]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[Customers]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[Employees]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[Order Details]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[Orders]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[Products]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[Shippers]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[Suppliers]"
+      }
+   ],
+   "UseDatabaseNames": true,
+   "UseDbContextSplitting": false,
+   "UseFluentApiOnly": false,
+   "UseHandleBars": false,
+   "UseInflector": false,
+   "UseLegacyPluralizer": false,
+   "UseNodaTime": false,
+   "UseSpatial": false,
+   "UseStoredProcedures": false
+}
