@@ -52,6 +52,54 @@
 				}
 			],
 			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Statistics",
+			"item": [
+				{
+					"name": "http://localhost:63703/api/statistics/GetOrdersByCountries",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:63703/api/statistics/GetOrdersByCountries",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "63703",
+							"path": [
+								"api",
+								"statistics",
+								"GetOrdersByCountries"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "http://localhost:63703/api/statistics/GetSalesByCategories",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:63703/api/statistics/GetSalesByCategories",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63703",
+					"path": [
+						"api",
+						"statistics",
+						"GetSalesByCategories"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"protocolProfileBehavior": {}

@@ -40,17 +40,15 @@ namespace OMSWebApp.Server.Controllers
         // GET: api/Statistics/GetSalesByCategories
         [Route("[action]")]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<object>>> GetSalesByCategories()
+        public async Task<ActionResult<IEnumerable<SalesByCategory>>> GetSalesByCategories()
         {
             var groupedOrderDetail = _context.OrderDetails.GroupBy(od => od.Product.Category.CategoryName);
-
 
             var salesByCategories = await groupedOrderDetail.Select(orderDetailGroup => new SalesByCategory
             {
                 CategoryName = orderDetailGroup.Key,
                 SalesSum = orderDetailGroup.Sum(orderDetail => orderDetail.Quantity * orderDetail.UnitPrice)
             }).OrderByDescending(salesByCategory => salesByCategory.SalesSum).ToListAsync();
-
 
             return salesByCategories;
         }
