@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using OMSWebApp.Server.AppDBContext;
+using OMSWebApp.Server.ApplicationDBContext;
 using OMSWebApp.Shared.Models;
 
 namespace OMSWebApp.Server.Controllers
@@ -31,7 +31,7 @@ namespace OMSWebApp.Server.Controllers
                     .Select(
                     c => new Category
                     {
-                        CategoryID = c.CategoryID,
+                        CategoryId = c.CategoryId,
                         CategoryName = c.CategoryName,
                         Description = c.Description,
                         Picture = c.Picture
@@ -45,7 +45,7 @@ namespace OMSWebApp.Server.Controllers
                     Select(
                     c => new Category
                     {
-                        CategoryID = c.CategoryID,
+                        CategoryId = c.CategoryId,
                         CategoryName = c.CategoryName,
                         Description = c.Description
                     }).ToListAsync();
@@ -65,7 +65,7 @@ namespace OMSWebApp.Server.Controllers
             else
                 return new Category
                 {
-                    CategoryID = category.CategoryID,
+                    CategoryId = category.CategoryId,
                     CategoryName = category.CategoryName,
                     Description = category.Description,
                 };
@@ -87,7 +87,7 @@ namespace OMSWebApp.Server.Controllers
             return CreatedAtAction(nameof(GetCategory),
                 new
                 {
-                    Id = item.CategoryID
+                    Id = item.CategoryId
                 },
                 category);
         }
@@ -96,7 +96,7 @@ namespace OMSWebApp.Server.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCategory(int id, Category category)
         {
-            if (id != category.CategoryID)
+            if (id != category.CategoryId)
             {
                 return BadRequest();
             }
@@ -139,7 +139,7 @@ namespace OMSWebApp.Server.Controllers
 
         private bool CategoryExists(int id)
         {
-            return _context.Categories.Any(e => e.CategoryID == id);
+            return _context.Categories.Any(e => e.CategoryId == id);
         }
     }
 }

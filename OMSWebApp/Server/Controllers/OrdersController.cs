@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections;
 using Microsoft.EntityFrameworkCore.Internal;
-using OMSWebApp.Server.AppDBContext;
+using OMSWebApp.Server.ApplicationDBContext;
 using OMSWebApp.Shared.Models;
 
 namespace OMSWebService.Controllers
@@ -40,7 +40,7 @@ namespace OMSWebService.Controllers
         public async Task<ActionResult<Order>> GetOrder(int id)
         {
             var order = await _context.Orders
-                .Where(o => o.OrderID == id)
+                .Where(o => o.OrderId == id)
                 .Include(o => o.OrderDetails)
                 .FirstOrDefaultAsync();
 
@@ -71,7 +71,7 @@ namespace OMSWebService.Controllers
 
             var result = CreatedAtAction(
                 nameof(GetOrder),
-                new { Id = order.OrderID },
+                new { Id = order.OrderId },
                 order);
             return result;
         }
@@ -80,7 +80,7 @@ namespace OMSWebService.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutOrder(int id, Order item)
         {
-            if (id != item.OrderID)
+            if (id != item.OrderId)
             {
                 return BadRequest();
             }
@@ -107,7 +107,7 @@ namespace OMSWebService.Controllers
             {
                 try
                 {
-                    var details = _context.OrderDetails.Where(o => order.OrderID == id);
+                    var details = _context.OrderDetails.Where(o => order.OrderId == id);
 
                     _context.OrderDetails.RemoveRange(details);
 
@@ -131,7 +131,7 @@ namespace OMSWebService.Controllers
         public async Task<IActionResult> DeleteOrdersRange([FromBody] int[] range)
         {
             List<Order> orders = new List<Order>();
-            List<OrderDetails> details = new List<OrderDetails>();
+            List<OrderDetail> details = new List<OrderDetail>();
 
             foreach (int id in range)
             {
@@ -143,7 +143,7 @@ namespace OMSWebService.Controllers
 
             foreach (var item in orders)
             {
-                var detail = _context.OrderDetails.Where(o => o.OrderID == item.OrderID) as OrderDetails;
+                var detail = _context.OrderDetails.Where(o => o.OrderId == item.OrderId) as OrderDetail;
                 if (detail != null) details.Add(detail);
             }
 

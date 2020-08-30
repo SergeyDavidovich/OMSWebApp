@@ -2,7 +2,7 @@
    "ContextClassName": "NorthwindContext",
    "ContextNamespace": null,
    "DefaultDacpacSchema": null,
-   "IncludeConnectionString": true,
+   "IncludeConnectionString": false,
    "ModelNamespace": null,
    "OutputContextPath": "ApplicationDBContext",
    "OutputPath": "Models",
@@ -43,11 +43,11 @@
          "Name": "[dbo].[Suppliers]"
       }
    ],
-   "UseDatabaseNames": true,
+   "UseDatabaseNames": false,
    "UseDbContextSplitting": false,
-   "UseFluentApiOnly": false,
+   "UseFluentApiOnly": true,
    "UseHandleBars": false,
-   "UseInflector": false,
+   "UseInflector": true,
    "UseLegacyPluralizer": false,
    "UseNodaTime": false,
    "UseSpatial": false,

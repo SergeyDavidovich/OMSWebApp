@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using OMSWebApp.Server.AppDBContext;
+using OMSWebApp.Server.ApplicationDBContext;
 using OMSWebApp.Shared.Models;
 using OMSWebApp.Shared.StatisticsObjects;
 
@@ -22,7 +22,7 @@ namespace OMSWebApp.Server.Controllers
             _context = context;
         }
 
-        // GET: api/Statistics
+        // GET: api/Statistics/GetOrdersByCountries
         [Route("[action]")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<OrdersByCountry>>> GetOrdersByCountries()
@@ -37,13 +37,30 @@ namespace OMSWebApp.Server.Controllers
             return ordersByCountries;
         }
 
+        // GET: api/Statistics/GetSalesByCategories
+        [Route("[action]")]
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<object>>> GetSalesByCategories()
+        {
+            var groupedOrderDetail = _context.OrderDetails.GroupBy(od => od.Product.Category.CategoryName);
+
+
+            var salesByCategories = await groupedOrderDetail.Select(orderDetailGroup => new SalesByCategory
+            {
+                CategoryName = orderDetailGroup.Key,
+                SalesSum = orderDetailGroup.Sum(orderDetail => orderDetail.Quantity * orderDetail.UnitPrice)
+            }).OrderByDescending(salesByCategory => salesByCategory.SalesSum).ToListAsync();
+
+
+            return salesByCategories;
+        }
+
+
 
 
         private bool OrderExists(int id)
         {
-            return _context.Orders.Any(e => e.OrderID == id);
+            return _context.Orders.Any(e => e.OrderId == id);
         }
-
-       
     }
 }

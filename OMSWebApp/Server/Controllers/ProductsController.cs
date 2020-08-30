@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections;
 using OMSWebApp.Shared.Models;
-using OMSWebApp.Server.AppDBContext;
+using OMSWebApp.Server.ApplicationDBContext;
 
 namespace OMSWebService.Controllers
 {
@@ -29,7 +29,7 @@ namespace OMSWebService.Controllers
             return await _context.Products
                 .Select(p => new Product
                 {
-                    ProductID = p.ProductID,
+                    ProductId = p.ProductId,
                     ProductName = p.ProductName,
                     Supplier = p.Supplier,
                     Category = p.Category,
@@ -62,7 +62,7 @@ namespace OMSWebService.Controllers
             return CreatedAtAction(nameof(GetProducts),
                 new Product
                 {
-                    ProductID = item.ProductID
+                    ProductId = item.ProductId
                 },
                 item);
         }
@@ -71,7 +71,7 @@ namespace OMSWebService.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutProduct(int id, Product item)
         {
-            if (id != item.ProductID)
+            if (id != item.ProductId)
             {
                 return BadRequest();
             }

@@ -8,13 +8,13 @@ namespace OMSWebApp.Shared.Models
     {
         public Product()
         {
-            Order_Details = new HashSet<OrderDetails>();
+            OrderDetails = new HashSet<OrderDetail>();
         }
 
-        public int ProductID { get; set; }
+        public int ProductId { get; set; }
         public string ProductName { get; set; }
-        public int? SupplierID { get; set; }
-        public int? CategoryID { get; set; }
+        public int? SupplierId { get; set; }
+        public int? CategoryId { get; set; }
         public string QuantityPerUnit { get; set; }
         public decimal? UnitPrice { get; set; }
         public short? UnitsInStock { get; set; }
@@ -24,6 +24,6 @@ namespace OMSWebApp.Shared.Models
 
         public virtual Category Category { get; set; }
         public virtual Supplier Supplier { get; set; }
-        public virtual ICollection<OrderDetails> Order_Details { get; set; }
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

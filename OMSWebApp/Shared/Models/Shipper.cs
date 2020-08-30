@@ -11,7 +11,7 @@ namespace OMSWebApp.Shared.Models
             Orders = new HashSet<Order>();
         }
 
-        public int ShipperID { get; set; }
+        public int ShipperId { get; set; }
         public string CompanyName { get; set; }
         public string Phone { get; set; }
 

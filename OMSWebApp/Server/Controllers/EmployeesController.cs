@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using OMSWebApp.Server.AppDBContext;
+using OMSWebApp.Server.ApplicationDBContext;
 using OMSWebApp.Shared.Models;
 
 
@@ -28,7 +28,7 @@ namespace OMSWebMini.Controllers
         {
             return await _context.Employees.Select(e => new Employee
             {
-                EmployeeID = e.EmployeeID,
+                EmployeeId = e.EmployeeId,
                 LastName = e.LastName
 
             }).ToListAsync();
@@ -58,7 +58,7 @@ namespace OMSWebMini.Controllers
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetEmployee",
-                new { id = employee.EmployeeID },
+                new { id = employee.EmployeeId },
                 employee);
         }
 
@@ -68,7 +68,7 @@ namespace OMSWebMini.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutEmployee(int id, Employee employee)
         {
-            if (id != employee.EmployeeID)
+            if (id != employee.EmployeeId)
             {
                 return BadRequest();
             }
@@ -112,7 +112,7 @@ namespace OMSWebMini.Controllers
 
         private bool EmployeeExists(int id)
         {
-            return _context.Employees.Any(e => e.EmployeeID == id);
+            return _context.Employees.Any(e => e.EmployeeId == id);
         }
     }
 }
