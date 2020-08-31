@@ -52,6 +52,26 @@ namespace OMSWebApp.Server.Controllers
 
             return salesByCategories;
         }
+        // GET: api/Statistics/GetSalesByEmployees
+        [Route("[action]")]
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<SalesByEmployee>>> GetSalesByEmployees()
+        {
+            var employees = await _context.Employees.Include(employee => employee.Orders).
+                ThenInclude(employeeOrder => employeeOrder.OrderDetails).
+                ToListAsync();
+
+            return await Task.Run(() =>
+            {
+                var salesByEmployees = employees.Select(employee => new SalesByEmployee
+                {
+                    LastName = employee.LastName,
+                    SalesSum = employee.Orders.Sum(order => order.OrderDetails.Sum(orderDetail => orderDetail.Quantity * orderDetail.UnitPrice))
+                }).ToList();
+
+                return salesByEmployees;
+            });
+        }
 
 
 

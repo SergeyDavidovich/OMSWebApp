@@ -1,0 +1,50 @@
+﻿@inherits LayoutComponentBase
+@layout MainLayout
+<div>
+    <h3>Orders management</h3>
+
+    <NavLink class="nav-link" href=@address Match="NavLinkMatch.All" @onclick="onClick">
+        <span class=@icon aria-hidden="true"></span> @text
+    </NavLink>
+
+</div>
+
+@Body
+
+<footer>
+    Current time is: @DateTime.Now.ToLongTimeString()
+</footer>
+
+@code {
+
+    const string CREATE_ADDRESS = "/orders/orderscreator";
+    const string JOURNAL_ADDRESS = "/orders/ordersjournal";
+    const string CREATE_TEXT = "Order creator";
+    const string JOURNAL_TEXT = "Orders journal";
+    const string JOURNAL_ICON = "oi oi-list-rich";
+    const string CREATE_ICON = "oi oi-plus";
+
+    string address;
+    string text;
+    string icon;
+
+    protected override void OnInitialized()
+    {
+        address = JOURNAL_ADDRESS;
+        text = JOURNAL_TEXT;
+        icon = CREATE_ICON;
+    }
+
+
+    private void onClick(MouseEventArgs e)
+    {
+        if (address == JOURNAL_ADDRESS) address = CREATE_ADDRESS;
+        else address = JOURNAL_ADDRESS;
+
+        if (text == JOURNAL_TEXT) text = CREATE_TEXT;
+        else text = JOURNAL_TEXT;
+
+        if (icon == JOURNAL_ICON) icon = CREATE_ICON;
+        else icon = JOURNAL_ICON;
+    }
+}

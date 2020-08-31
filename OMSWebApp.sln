@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OMSWebApp.Server", "OMSWebApp\Server\OMSWebApp.Server.csproj", "{6F70485A-BEF8-41AF-851A-A81EE04FEA4C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OMSWebApp.Server", "OMSWebApp\Server\OMSWebApp.Server.csproj", "{6F70485A-BEF8-41AF-851A-A81EE04FEA4C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OMSWebApp.Client", "OMSWebApp\Client\OMSWebApp.Client.csproj", "{7A3DDFC3-089C-4FA6-885E-19BA75A5DF6B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OMSWebApp.Client", "OMSWebApp\Client\OMSWebApp.Client.csproj", "{7A3DDFC3-089C-4FA6-885E-19BA75A5DF6B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OMSWebApp.Shared", "OMSWebApp\Shared\OMSWebApp.Shared.csproj", "{BC426AF0-2370-4DAC-A843-DCAF42C66165}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OMSWebApp.Shared", "OMSWebApp\Shared\OMSWebApp.Shared.csproj", "{BC426AF0-2370-4DAC-A843-DCAF42C66165}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
