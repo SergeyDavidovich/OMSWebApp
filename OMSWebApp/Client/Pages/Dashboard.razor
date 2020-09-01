@@ -3,58 +3,70 @@
 @using Syncfusion.Blazor.Charts
 
 <div id="grid">
-   <div>
-       <SfAccumulationChart Title="Mobile Browser Statistics" EnableAnimation="true" EnableSmartLabels="true">
-           <AccumulationChartSeriesCollection>
-               <AccumulationChartSeries DataSource="@StatisticsDetails" XName="Browser" YName="Users" Name="Browser" ExplodeOffset="12" Explode="true" InnerRadius="60">
-                   <AccumulationDataLabelSettings Visible="true" Name="users" Position="AccumulationLabelPosition.Outside">
-                       <AccumulationChartDataLabelFont FontWeight="600"></AccumulationChartDataLabelFont>
-                   </AccumulationDataLabelSettings>
-               </AccumulationChartSeries>
-           </AccumulationChartSeriesCollection>
-           <AccumulationChartTooltipSettings Enable="true"></AccumulationChartTooltipSettings>
-           <AccumulationChartLegendSettings Visible="@ShowLegend" Background="whitesmoke" Position="LegendPosition.Bottom"></AccumulationChartLegendSettings>
-           <AccumulationChartBorder Color="gray" Width="1"></AccumulationChartBorder>
-           <AccumulationChartEvents OnAnimationComplete="@AnimationHandler"></AccumulationChartEvents>
-       </SfAccumulationChart>
+    <div>
+        <SfAccumulationChart Title="Mobile Browser Statistics" EnableAnimation="true" EnableSmartLabels="true">
+            <AccumulationChartSeriesCollection>
+                <AccumulationChartSeries DataSource="@StatisticsDetails" XName="Browser" YName="Users" Name="Browser" ExplodeOffset="22" Explode="true" InnerRadius="60">
+                    <AccumulationDataLabelSettings Visible="true" Name="users" Position="AccumulationLabelPosition.Inside">
+                        <AccumulationChartDataLabelFont FontWeight="600"></AccumulationChartDataLabelFont>
+                    </AccumulationDataLabelSettings>
+                </AccumulationChartSeries>
+            </AccumulationChartSeriesCollection>
+            <AccumulationChartTooltipSettings Enable="true"></AccumulationChartTooltipSettings>
+            <AccumulationChartLegendSettings Visible="@ShowLegend" Background="whitesmoke" Position="LegendPosition.Bottom"></AccumulationChartLegendSettings>
+            <AccumulationChartBorder Color="gray" Width="1"></AccumulationChartBorder>
+            <AccumulationChartEvents OnAnimationComplete="@AnimationHandler"></AccumulationChartEvents>
+        </SfAccumulationChart>
     </div>
-    
-   <div>
-       <SfAccumulationChart Title="Mobile Browser Statistics">
-           <AccumulationChartSeriesCollection>
-               <AccumulationChartSeries DataSource="@StatisticsDetails" XName="Browser" YName="Users" Name="Browser">
-               </AccumulationChartSeries>
-           </AccumulationChartSeriesCollection>
-           <AccumulationChartLegendSettings Visible="@ShowLegend" Background="whitesmoke"></AccumulationChartLegendSettings>
-           <AccumulationChartBorder Color="gray" Width="1"></AccumulationChartBorder>
-           <AccumulationChartEvents OnAnimationComplete="@AnimationHandler"></AccumulationChartEvents>
-       </SfAccumulationChart>
-   </div>
 
-   <div>
-       <SfAccumulationChart Title="Mobile Browser Statistics">
-           <AccumulationChartSeriesCollection>
-               <AccumulationChartSeries DataSource="@StatisticsDetails" XName="Browser" YName="Users" Name="Browser">
-               </AccumulationChartSeries>
-           </AccumulationChartSeriesCollection>
-           <AccumulationChartLegendSettings Visible="@ShowLegend" Background="whitesmoke"></AccumulationChartLegendSettings>
-           <AccumulationChartBorder Color="gray" Width="1"></AccumulationChartBorder>
-           <AccumulationChartEvents OnAnimationComplete="@AnimationHandler"></AccumulationChartEvents>
-       </SfAccumulationChart>
-   </div>
+    <div>
+        <SfAccumulationChart Title="Mobile Browser Statistics" EnableAnimation="true" EnableSmartLabels="true">
+            <AccumulationChartSeriesCollection>
+                <AccumulationChartSeries DataSource="@StatisticsDetails" XName="Browser" YName="Users" Name="Browser" ExplodeOffset="22" Explode="true" InnerRadius="0">
+                    <AccumulationDataLabelSettings Visible="true" Name="users" Position="AccumulationLabelPosition.Inside">
+                        <AccumulationChartDataLabelFont FontWeight="600"></AccumulationChartDataLabelFont>
+                    </AccumulationDataLabelSettings>
+                </AccumulationChartSeries>
+            </AccumulationChartSeriesCollection>
+            <AccumulationChartTooltipSettings Enable="true"></AccumulationChartTooltipSettings>
+            <AccumulationChartLegendSettings Visible="@ShowLegend" Background="whitesmoke" Position="LegendPosition.Bottom"></AccumulationChartLegendSettings>
+            <AccumulationChartBorder Color="gray" Width="1"></AccumulationChartBorder>
+            <AccumulationChartEvents OnAnimationComplete="@AnimationHandler"></AccumulationChartEvents>
+        </SfAccumulationChart>
+    </div>
+
+    <div>
+        <SfAccumulationChart Title="Mobile Browser Statistics" EnableAnimation="true" EnableSmartLabels="true">
+            <AccumulationChartSeriesCollection>
+                <AccumulationChartSeries DataSource="@StatisticsDetails" XName="Browser" YName="Users" Name="Browser" ExplodeOffset="22" Explode="true" InnerRadius="30"
+                                         StartAngle="270" EndAngle="90">
+                    <AccumulationDataLabelSettings Visible="true" Name="users" Position="AccumulationLabelPosition.Inside">
+                        <AccumulationChartDataLabelFont FontWeight="600"></AccumulationChartDataLabelFont>
+                    </AccumulationDataLabelSettings>
+                </AccumulationChartSeries>
+            </AccumulationChartSeriesCollection>
+            <AccumulationChartTooltipSettings Enable="true"></AccumulationChartTooltipSettings>
+            <AccumulationChartLegendSettings Visible="@ShowLegend" Background="whitesmoke" Position="LegendPosition.Bottom"></AccumulationChartLegendSettings>
+            <AccumulationChartBorder Color="gray" Width="1"></AccumulationChartBorder>
+            <AccumulationChartEvents OnAnimationComplete="@AnimationHandler"></AccumulationChartEvents>
+        </SfAccumulationChart>
+    </div>
 
     <div>
         <SfChart Width="100%">
             <ChartPrimaryXAxis ValueType="Syncfusion.Blazor.Charts.ValueType.Category"></ChartPrimaryXAxis>
-
             <ChartSeriesCollection>
                 <ChartSeries DataSource="@MedalDetails" XName="X" YName="YValue" ColumnSpacing="0.2" ColumnWidth="0.7" Type="ChartSeriesType.Bar">
                 </ChartSeries>
                 <ChartSeries DataSource="@MedalDetails" XName="X" YName="YValue1" ColumnSpacing="0.2" ColumnWidth="0.2" Type="ChartSeriesType.Bar">
                 </ChartSeries>
             </ChartSeriesCollection>
+            <ChartArea>
+                <ChartAreaBorder Color="red" Width="1"></ChartAreaBorder>
+            </ChartArea>
         </SfChart>
     </div>
+
     <div id="item1">
         <SfChart>
             <ChartPrimaryXAxis ValueType="Syncfusion.Blazor.Charts.ValueType.Category"></ChartPrimaryXAxis>
@@ -71,10 +83,8 @@
     </div>
 </div>
 
-
 @code
 {
-
     public class Statistics
     {
         public string Browser;
