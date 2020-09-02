@@ -7,6 +7,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
+//https://www.codewithmukesh.com/blog/blazor-crud-with-entity-framework-core/
+
 namespace OMSWebApp.Server
 {
     public class Program

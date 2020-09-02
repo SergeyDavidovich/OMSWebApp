@@ -11,16 +11,13 @@
 
 @Body
 
-<footer>
-    Current time is: @DateTime.Now.ToLongTimeString()
-</footer>
 
 @code {
 
     const string CREATE_ADDRESS = "/orders/orderscreator";
     const string JOURNAL_ADDRESS = "/orders/ordersjournal";
-    const string CREATE_TEXT = "Order creator";
-    const string JOURNAL_TEXT = "Orders journal";
+    const string CREATE_TEXT = "TO CREATION";
+    const string JOURNAL_TEXT = "TO JOURNAL";
     const string JOURNAL_ICON = "oi oi-list-rich";
     const string CREATE_ICON = "oi oi-plus";
 
@@ -31,7 +28,7 @@
     protected override void OnInitialized()
     {
         address = JOURNAL_ADDRESS;
-        text = JOURNAL_TEXT;
+        text = CREATE_TEXT;
         icon = JOURNAL_ICON;
     }
 

@@ -9,7 +9,7 @@
 			"name": "Categories",
 			"item": [
 				{
-					"name": "http://localhost:63703/api/categories",
+					"name": "http://localhost:63703/api/orders",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -76,30 +76,78 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "http://localhost:63703/api/statistics/GetSalesByEmployees",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:63703/api/statistics/GetSalesByEmployees",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "63703",
+							"path": [
+								"api",
+								"statistics",
+								"GetSalesByEmployees"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:63703/api/statistics/GetSalesByCategories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:63703/api/statistics/GetSalesByCategories",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "63703",
+							"path": [
+								"api",
+								"statistics",
+								"GetSalesByCategories"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "http://localhost:63703/api/statistics/GetSalesByCategories",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:63703/api/statistics/GetSalesByCategories",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "63703",
-					"path": [
-						"api",
-						"statistics",
-						"GetSalesByCategories"
-					]
+			"name": "Orders",
+			"item": [
+				{
+					"name": "http://localhost:63703/api/orders",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:63703/api/orders/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "63703",
+							"path": [
+								"api",
+								"orders",
+								""
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			],
+			"protocolProfileBehavior": {}
 		}
 	],
 	"protocolProfileBehavior": {}

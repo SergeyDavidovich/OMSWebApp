@@ -29,7 +29,7 @@ namespace OMSWebService.Controllers
         {
             //var orders = await _context.Orders.ToListAsync();
 
-            var orders = await _context.Orders.Include(o => o.OrderDetails).ToListAsync();
+            var orders = await _context.Orders.ToListAsync();//.Include(o => o.OrderDetails).ToListAsync();
 
             return orders;
         }
