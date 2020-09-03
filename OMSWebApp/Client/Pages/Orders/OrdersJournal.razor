@@ -44,16 +44,16 @@
 
 @code {
 
-    private List<Order> orders;
+    //private List<Order> orders;
 
-    protected override async Task OnInitializedAsync()
-    {
-        //#if DEBUG
-        //        await Task.Delay(10000);
-        //#endif
+    //protected override async Task OnInitializedAsync()
+    //{
+    //    //#if DEBUG
+    //    //        await Task.Delay(10000);
+    //    //#endif
 
-        orders = await client.GetFromJsonAsync<List<Order>>("api/orders");
-    }
+    //    orders = await client.GetFromJsonAsync<List<Order>>("api/orders");
+    //}
 }
 <style>
     #grid {
