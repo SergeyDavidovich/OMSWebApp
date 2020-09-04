@@ -10,14 +10,13 @@
 
 <h5>Orders journal</h5>
 <div id="grid">
-
-    <div>
-        @if (orders == null)
-        {
-            <p><em>Loading...</em></p>
-        }
-        else
-        {
+    @if (orders == null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else
+    {
+        <div>
             <SfGrid DataSource="@orders" AllowPaging="true" AllowSelection="true" EnableAltRow="true">
                 <GridSelectionSettings Type="SelectionType.Single"></GridSelectionSettings>
                 <GridColumns>
@@ -36,31 +35,25 @@
                 </GridColumns>
                 <GridEvents RowSelected="RowSelectedHandler" TValue="Order"></GridEvents>
             </SfGrid>
-        }
-    </div>
-    <div>
-        <p>Order Id : @selectedOrderId </p>
-        <p>Customer Id: @customerId</p>
-        <p>Order date: @orderDate</p>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title"><span>ORDER ID : </span><span class="font-weight-bold">@selectedOrderId</span></h4>
+                <p class="card-text"><span>CUSTOMER ID: </span><span class="font-weight-bold">@customerId</span></p>
+                <p class="card-text"><span>ORDER DATE: </span><span class="font-weight-bold">@orderDate</span></p>
+                <p class="card-text"><span>EMPLOYEE ID: </span><span class="font-weight-bold">@employeeId</span></p>
 
-        <p>Order path: @orderPath</p>
-
-        @if (orderDetails == null)
-        {
-            <p><em>Loading...</em></p>
-        }
-        else
-        {
-            <SfGrid DataSource="@orderDetails">
-                <GridColumns>
-                    <GridColumn Field="@nameof(OrderDetail.OrderId)" HeaderText="Order id"></GridColumn>
-                    <GridColumn Field="@nameof(OrderDetail.ProductId)" HeaderText="Product id"></GridColumn>
-                    <GridColumn Field="@nameof(OrderDetail.UnitPrice)" HeaderText="Unit price"></GridColumn>
-                    <GridColumn Field="@nameof(OrderDetail.Discount)" HeaderText="Discount"></GridColumn>
-                </GridColumns>
-            </SfGrid>
-        }
-    </div>
+                <SfGrid DataSource="@orderDetails">
+                    <GridColumns>
+                        <GridColumn Field="@nameof(OrderDetail.ProductId)" HeaderText="PRODUCT ID"></GridColumn>
+                        <GridColumn Field="@nameof(OrderDetail.UnitPrice)" HeaderText="UNIT PRICE"></GridColumn>
+                        <GridColumn Field="@nameof(OrderDetail.Quantity)" HeaderText="QUANTITY"></GridColumn>
+                        <GridColumn Field="@nameof(OrderDetail.Discount)" HeaderText="DISCOUNT"></GridColumn>
+                    </GridColumns>
+                </SfGrid>
+            </div>
+        </div>
+    }
 </div>
 
 @code {
@@ -73,6 +66,7 @@
     string selectedOrderId;
     string customerId;
     string orderDate;
+    string employeeId;
 
     protected override async Task OnInitializedAsync()
     {
@@ -91,7 +85,7 @@
 
         customerId = selectedOrder.CustomerId;
         orderDate = selectedOrder.OrderDate.ToString();
-
+        employeeId = selectedOrder.EmployeeId.ToString();
 
         orderDetails = selectedOrder.OrderDetails.ToList<OrderDetail>();
 
@@ -104,7 +98,7 @@
         display: grid;
         grid-template-columns: 2fr 1fr;
         grid-template-rows: 1fr 1fr;
-        grid-gap: 2vw;
+        grid-gap: 1vw;
     }
 
         #grid > div {
