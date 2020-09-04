@@ -8,7 +8,6 @@
 @inject HttpClient client
 
 
-<h5>Orders journal</h5>
 <div id="grid">
     @if (orders == null)
     {
@@ -16,29 +15,32 @@
     }
     else
     {
-        <div>
-            <SfGrid DataSource="@orders" AllowPaging="true" AllowSelection="true" EnableAltRow="true">
-                <GridSelectionSettings Type="SelectionType.Single"></GridSelectionSettings>
-                <GridColumns>
-                    <GridColumn Field=@nameof(Order.OrderId) HeaderText="ORDER ID"
-                                HeaderTextAlign="TextAlign.Center" TextAlign="TextAlign.Center" AutoFit="false" Width="100"></GridColumn>
-                    <GridColumn Field=@nameof(Order.OrderDate) HeaderText="ORDER DATE"
-                                HeaderTextAlign="TextAlign.Left" Format="D" TextAlign="TextAlign.Left" AutoFit="false" Width="140"></GridColumn>
-                    <GridColumn Field=@nameof(Order.CustomerId) HeaderText="CUSTOMER"
-                                HeaderTextAlign="TextAlign.Left" Format="D" TextAlign="TextAlign.Left" AutoFit="false" Width="150"></GridColumn>
-                    <GridColumn Field=@nameof(Order.ShipCity) HeaderText="SHIP SITY"
-                                HeaderTextAlign="TextAlign.Left" Format="D" TextAlign="TextAlign.Left" AutoFit="false" Width="150"></GridColumn>
-                    <GridColumn Field=@nameof(Order.ShipCountry) HeaderText="SHIP COUNTRY"
-                                HeaderTextAlign="TextAlign.Left" Format="D" TextAlign="TextAlign.Left" AutoFit="false" Width="150"></GridColumn>
-                    <GridColumn Field=@nameof(Order.ShipAddress) HeaderText="SHIPPING ADDRESS"
-                                HeaderTextAlign="TextAlign.Left" Format="D" TextAlign="TextAlign.Left" AutoFit="true" Width="250"></GridColumn>
-                </GridColumns>
-                <GridEvents RowSelected="RowSelectedHandler" TValue="Order"></GridEvents>
-            </SfGrid>
+        <div class="card">
+            <div class="card-body">
+                <h5>ORDERS JOURNAL</h5>
+                <SfGrid DataSource="@orders" AllowPaging="true" AllowSelection="true" EnableAltRow="true">
+                    <GridSelectionSettings Type="SelectionType.Single"></GridSelectionSettings>
+                    <GridColumns>
+                        <GridColumn Field=@nameof(Order.OrderId) HeaderText="ORDER ID"
+                                    HeaderTextAlign="TextAlign.Center" TextAlign="TextAlign.Center" AutoFit="false" Width="100"></GridColumn>
+                        <GridColumn Field=@nameof(Order.OrderDate) HeaderText="ORDER DATE"
+                                    HeaderTextAlign="TextAlign.Left" Format="D" TextAlign="TextAlign.Left" AutoFit="false" Width="140"></GridColumn>
+                        <GridColumn Field=@nameof(Order.CustomerId) HeaderText="CUSTOMER"
+                                    HeaderTextAlign="TextAlign.Left" Format="D" TextAlign="TextAlign.Left" AutoFit="false" Width="150"></GridColumn>
+                        <GridColumn Field=@nameof(Order.ShipCity) HeaderText="SHIP SITY"
+                                    HeaderTextAlign="TextAlign.Left" Format="D" TextAlign="TextAlign.Left" AutoFit="false" Width="150"></GridColumn>
+                        <GridColumn Field=@nameof(Order.ShipCountry) HeaderText="SHIP COUNTRY"
+                                    HeaderTextAlign="TextAlign.Left" Format="D" TextAlign="TextAlign.Left" AutoFit="false" Width="150"></GridColumn>
+                        <GridColumn Field=@nameof(Order.ShipAddress) HeaderText="SHIPPING ADDRESS"
+                                    HeaderTextAlign="TextAlign.Left" Format="D" TextAlign="TextAlign.Left" AutoFit="true" Width="250"></GridColumn>
+                    </GridColumns>
+                    <GridEvents RowSelected="RowSelectedHandler" TValue="Order"></GridEvents>
+                </SfGrid>
+            </div>
         </div>
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title"><span>ORDER ID : </span><span class="font-weight-bold">@selectedOrderId</span></h4>
+                <h5 class="card-title"><span>ORDER ID : </span><span class="font-weight-bold">@selectedOrderId</span></h5>
                 <p class="card-text"><span>CUSTOMER ID: </span><span class="font-weight-bold">@customerId</span></p>
                 <p class="card-text"><span>ORDER DATE: </span><span class="font-weight-bold">@orderDate</span></p>
                 <p class="card-text"><span>EMPLOYEE ID: </span><span class="font-weight-bold">@employeeId</span></p>
