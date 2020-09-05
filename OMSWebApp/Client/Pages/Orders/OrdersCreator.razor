@@ -1,8 +1,80 @@
 ﻿@layout OrdersLayout
 @page "/orders/orderscreator"
 
+@using Syncfusion.Blazor.Grids
+@using OMSWebApp.Shared.Models
+
+@inject HttpClient client
+
 <h5>Orders Creator</h5>
+
+<div id="grid">
+    <div class="card shadow">
+        <SfGrid DataSource="@products"  Height="600" Width="auto" AllowPaging="false" AllowSelection="true" EnableAltRow="true">
+            <GridSelectionSettings Type="SelectionType.Single"></GridSelectionSettings>
+            <GridColumns>
+                <GridColumn Type="ColumnType.CheckBox" Width="50"></GridColumn>
+                <GridColumn Field=@nameof(Product.ProductId) HeaderText="ID"
+                            HeaderTextAlign="TextAlign.Center" TextAlign="TextAlign.Center" AutoFit="false" Width="50"></GridColumn>
+                <GridColumn Field=@nameof(Product.ProductName) HeaderText="PRODUCT NAME"
+                            HeaderTextAlign="TextAlign.Left" TextAlign="TextAlign.Left" AutoFit="false" Width="160"></GridColumn>
+                <GridColumn Field=@nameof(Product.UnitPrice) HeaderText="UNIT PRICE"
+                            HeaderTextAlign="TextAlign.Left" Format="N2" TextAlign="TextAlign.Right" AutoFit="false" Width="120"></GridColumn>
+                <GridColumn Field=@nameof(Product.UnitsInStock) HeaderText="IN STOCK"
+                            HeaderTextAlign="TextAlign.Left" TextAlign="TextAlign.Center" AutoFit="false" Width="120"></GridColumn>
+            </GridColumns>
+            @*<GridEvents RowSelected="RowSelectedHandler" TValue="Order"></GridEvents>*@
+        </SfGrid>
+    </div>
+    <div class="card shadow">
+        <SfGrid DataSource="@products" Height="600" Width="auto" AllowPaging="false" AllowSelection="true" EnableAltRow="true">
+            <GridSelectionSettings Type="SelectionType.Single"></GridSelectionSettings>
+            <GridColumns>
+                <GridColumn Type="ColumnType.CheckBox" Width="50"></GridColumn>
+                <GridColumn Field=@nameof(Product.ProductId) HeaderText="ID"
+                            HeaderTextAlign="TextAlign.Center" TextAlign="TextAlign.Center" AutoFit="false" Width="50"></GridColumn>
+                <GridColumn Field=@nameof(Product.ProductName) HeaderText="PRODUCT NAME"
+                            HeaderTextAlign="TextAlign.Left" TextAlign="TextAlign.Left" AutoFit="false" Width="160"></GridColumn>
+                <GridColumn Field=@nameof(Product.UnitPrice) HeaderText="UNIT PRICE"
+                            HeaderTextAlign="TextAlign.Left" Format="N2" TextAlign="TextAlign.Right" AutoFit="false" Width="120"></GridColumn>
+                <GridColumn Field=@nameof(Product.UnitsInStock) HeaderText="IN STOCK"
+                            HeaderTextAlign="TextAlign.Left" TextAlign="TextAlign.Center" AutoFit="false" Width="120"></GridColumn>
+            </GridColumns>
+            @*<GridEvents RowSelected="RowSelectedHandler" TValue="Order"></GridEvents>*@
+        </SfGrid>
+    </div>
+    <div class="shadow">
+
+    </div>
+</div>
 
 @code {
 
+
+    List<Product> products;
+    Order selectedOrder;
+    List<OrderDetail> orderDetails;
+    string orderPath;
+
+    protected override async Task OnInitializedAsync()
+    {
+        //#if DEBUG
+        //        await Task.Delay(10000);
+        //#endif
+
+        products = await client.GetFromJsonAsync<List<Product>>("api/products");
+    }
+
 }
+<style>
+    #grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-gap: 1vw;
+    }
+
+        #grid > div {
+            padding: .5em;
+            text-align: left;
+        }
+</style>
