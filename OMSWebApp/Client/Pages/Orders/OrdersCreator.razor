@@ -3,6 +3,7 @@
 
 @using Syncfusion.Blazor.Grids
 @using OMSWebApp.Shared.Models
+@using OMSWebApp.Client.Components
 
 @inject HttpClient client
 
@@ -10,8 +11,8 @@
 
 <div id="grid">
     <div class="card shadow">
-        <SfGrid DataSource="@products"  Height="600" Width="auto" AllowPaging="false" AllowSelection="true" EnableAltRow="true">
-            <GridSelectionSettings Type="SelectionType.Single"></GridSelectionSettings>
+        <SfGrid @ref="productsGrid" DataSource="@products" Height="600" Width="auto" AllowPaging="false" AllowSelection="true" EnableAltRow="true">
+            <GridSelectionSettings Type="SelectionType.Multiple"></GridSelectionSettings>
             <GridColumns>
                 <GridColumn Type="ColumnType.CheckBox" Width="50"></GridColumn>
                 <GridColumn Field=@nameof(Product.ProductId) HeaderText="ID"
@@ -23,48 +24,70 @@
                 <GridColumn Field=@nameof(Product.UnitsInStock) HeaderText="IN STOCK"
                             HeaderTextAlign="TextAlign.Left" TextAlign="TextAlign.Center" AutoFit="false" Width="120"></GridColumn>
             </GridColumns>
-            @*<GridEvents RowSelected="RowSelectedHandler" TValue="Order"></GridEvents>*@
+            <GridEvents RowSelected="RowSelectHandler" RowDeselected="RowDeselectHandler" TValue="Product"></GridEvents>
         </SfGrid>
     </div>
     <div class="card shadow">
-        <SfGrid DataSource="@products" Height="600" Width="auto" AllowPaging="false" AllowSelection="true" EnableAltRow="true">
-            <GridSelectionSettings Type="SelectionType.Single"></GridSelectionSettings>
+        <SfGrid DataSource="@selectedDetails" Height="600" Width="auto">
             <GridColumns>
-                <GridColumn Type="ColumnType.CheckBox" Width="50"></GridColumn>
-                <GridColumn Field=@nameof(Product.ProductId) HeaderText="ID"
+                <GridColumn Field=@nameof(OrderDetail.ProductId) HeaderText="ID"
                             HeaderTextAlign="TextAlign.Center" TextAlign="TextAlign.Center" AutoFit="false" Width="50"></GridColumn>
-                <GridColumn Field=@nameof(Product.ProductName) HeaderText="PRODUCT NAME"
+                <GridColumn Field=@nameof(OrderDetail.Quantity) HeaderText="QUANTITY"
                             HeaderTextAlign="TextAlign.Left" TextAlign="TextAlign.Left" AutoFit="false" Width="160"></GridColumn>
-                <GridColumn Field=@nameof(Product.UnitPrice) HeaderText="UNIT PRICE"
+                <GridColumn Field=@nameof(OrderDetail.UnitPrice) HeaderText="UNIT PRICE"
                             HeaderTextAlign="TextAlign.Left" Format="N2" TextAlign="TextAlign.Right" AutoFit="false" Width="120"></GridColumn>
-                <GridColumn Field=@nameof(Product.UnitsInStock) HeaderText="IN STOCK"
+                <GridColumn Field=@nameof(OrderDetail.Discount) HeaderText="DISCOUNT"
                             HeaderTextAlign="TextAlign.Left" TextAlign="TextAlign.Center" AutoFit="false" Width="120"></GridColumn>
             </GridColumns>
-            @*<GridEvents RowSelected="RowSelectedHandler" TValue="Order"></GridEvents>*@
         </SfGrid>
     </div>
-    <div class="shadow">
-
+    <div class="card shadow">
+        <Invoice Order="new Order() { OrderId=1}"></Invoice>
     </div>
 </div>
 
 @code {
 
+    SfGrid<Product> productsGrid;
 
     List<Product> products;
-    Order selectedOrder;
-    List<OrderDetail> orderDetails;
-    string orderPath;
+    List<Product> selectedProducts;
+    List<OrderDetail> selectedDetails { get; set; }
+
 
     protected override async Task OnInitializedAsync()
     {
         //#if DEBUG
-        //        await Task.Delay(10000);
+        //        await Task.Delay(5000);
         //#endif
+
+        //orderDetails = new List<OrderDetail>();
+        //details = new List<OrderDetail>();
 
         products = await client.GetFromJsonAsync<List<Product>>("api/products");
     }
 
+    public void RowSelectHandler(RowSelectEventArgs<Product> args)
+    {
+        SelectDeseLect();
+    }
+
+    public void RowDeselectHandler(RowDeselectEventArgs<Product> args)
+    {
+        SelectDeseLect();
+    }
+    private void SelectDeseLect()
+    {
+        selectedProducts = productsGrid.SelectedRecords;
+
+        selectedDetails = selectedProducts.Select(detail => new OrderDetail()
+        {
+            ProductId = detail.ProductId,
+            Discount = 0,
+            UnitPrice = detail.UnitPrice.Value,
+            Quantity = 1
+        }).ToList();
+    }
 }
 <style>
     #grid {

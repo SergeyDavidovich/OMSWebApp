@@ -4,6 +4,7 @@
 
 @using Syncfusion.Blazor.Grids
 @using OMSWebApp.Shared.Models
+@using OMSWebApp.Client.Components
 
 @inject HttpClient client
 
@@ -86,9 +87,9 @@
 
     public void RowSelectedHandler(RowSelectEventArgs<Order> args)
     {
-        selectedOrderId = args.Data.OrderId.ToString();
+        var id = args.Data.OrderId;
 
-        selectedOrder = orders.Find(o => o.OrderId == int.Parse(selectedOrderId));
+        var order = orders.First<Order>(o => o.OrderId == id);
 
         customerId = selectedOrder.CustomerId;
         orderDate = selectedOrder.OrderDate.ToString();
@@ -104,7 +105,7 @@
         totalOrder = String.Format("{0:F}", total);
 
 
-        StateHasChanged();
+        //StateHasChanged();
     }
 }
 

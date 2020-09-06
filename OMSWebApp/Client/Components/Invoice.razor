@@ -1,0 +1,49 @@
+﻿@using Syncfusion.Blazor.Grids
+@using OMSWebApp.Shared.Models
+
+
+<h3>Invoice</h3>
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title"><span>ORDER ID : </span><span class="font-weight-bold">@OrderId</span></h5>
+        <p class="card-text"><span>CUSTOMER ID: </span><span class="font-weight-bold">@customerId</span></p>
+        <p class="card-text"><span>ORDER DATE: </span><span class="font-weight-bold">@orderDate</span></p>
+        <p class="card-text"><span>EMPLOYEE ID: </span><span class="font-weight-bold">@employeeId</span></p>
+        <div class="card-body">
+            <SfGrid @ref="dataGrid" DataSource="@orderDetails">
+                <GridColumns>
+                    <GridColumn Field="@nameof(OrderDetail.ProductId)" HeaderText="PRODUCT ID"></GridColumn>
+                    <GridColumn Field="@nameof(OrderDetail.UnitPrice)" HeaderText="UNIT PRICE" Format="n2"></GridColumn>
+                    <GridColumn Field="@nameof(OrderDetail.Quantity)" HeaderText="QUANTITY"></GridColumn>
+                    <GridColumn Field="@nameof(OrderDetail.Discount)" HeaderText="DISCOUNT"></GridColumn>
+                </GridColumns>
+            </SfGrid>
+        </div>
+        <div>
+            <p class="align-bottom text-md-right"><span>TOTAL: </span><span class="font-weight-bold">@totalOrder</span></p>
+        </div>
+    </div>
+</div>
+
+@code {
+
+    SfGrid<OrderDetail> dataGrid;
+    [Parameter]
+    public Order Order{ get; set; }
+
+    [Parameter]
+    public string OrderId { get => Order.OrderId.ToString(); set { } }
+
+    [Parameter]
+    public string customerId { get; set; }
+    [Parameter]
+    public string orderDate { get; set; }
+    [Parameter]
+    public string employeeId { get; set; }
+    [Parameter]
+    public string totalOrder { get; set; }
+
+    [Parameter]
+    public IEnumerable<OrderDetail> orderDetails { get; set; }
+}
