@@ -41,7 +41,7 @@
         </div>
         <div class="card shadow">
             <div class="card-body">
-                <h5 class="card-title"><span>ORDER ID : </span><span class="font-weight-bold">@selectedOrderId</span></h5>
+                <h5 class="card-title"><span>ORDER ID : </span><span class="font-weight-bold">@orderId</span></h5>
                 <p class="card-text"><span>CUSTOMER ID: </span><span class="font-weight-bold">@customerId</span></p>
                 <p class="card-text"><span>ORDER DATE: </span><span class="font-weight-bold">@orderDate</span></p>
                 <p class="card-text"><span>EMPLOYEE ID: </span><span class="font-weight-bold">@employeeId</span></p>
@@ -70,7 +70,7 @@
     List<OrderDetail> orderDetails;
     string orderPath;
 
-    string selectedOrderId;
+    string orderId;
     string customerId;
     string orderDate;
     string employeeId;
@@ -91,11 +91,12 @@
 
         var order = orders.First<Order>(o => o.OrderId == id);
 
-        customerId = selectedOrder.CustomerId;
-        orderDate = selectedOrder.OrderDate.ToString();
-        employeeId = selectedOrder.EmployeeId.ToString();
+        orderId = order.OrderId.ToString();
+        customerId = order.CustomerId;
+        orderDate = order.OrderDate.ToString();
+        employeeId = order.EmployeeId.ToString();
 
-        orderDetails = selectedOrder.OrderDetails.ToList<OrderDetail>();
+        orderDetails = order.OrderDetails.ToList<OrderDetail>();
 
         double total = orderDetails.Select(o => new
         {
