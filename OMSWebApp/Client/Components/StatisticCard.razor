@@ -1,0 +1,61 @@
+﻿
+
+<div id="card">
+    <div id="header">@Header</div>
+    <div id="body">@Body</div>
+    <hr style="height:0px; background-color:gainsboro" />
+    <div id="footer">@Footer</div>
+</div>
+@code {
+
+    [Parameter]
+    public string Header { get; set; }
+
+    double _body;
+    [Parameter]
+    public string Body
+    {
+        get => _body.ToString("C", System.Globalization.CultureInfo.CurrentCulture);
+        set { _body = Double.Parse(value); }
+    }
+
+    [Parameter]
+    public string Footer { get; set; }
+
+}
+<style>
+    #grid-main {
+        display: grid;
+        grid-template-rows: 0.5fr 1fr 0.5fr;
+        background-color: white;
+    }
+
+    #grid-#main > grid {
+    }
+
+    #card {
+        padding: 10px;
+    }
+
+    #header {
+        font-weight: normal;
+        font-size: 18px;
+        color: crimson;
+        text-align: left;
+        background-color: white;
+    }
+
+    #body {
+        color: #101c2d;
+        font-size: 32px;
+        text-align: left;
+        background-color: white;
+    }
+
+    #footer {
+        color:darkgray;
+        font-size: 14px;
+        text-align: right;
+        background-color: white;
+    }
+</style>

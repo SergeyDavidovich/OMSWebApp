@@ -1,104 +1,246 @@
 ﻿@page "/dashboard"
 
 @using Syncfusion.Blazor.Charts
+@using Syncfusion.Blazor.Cards
+@using Syncfusion.Blazor.Buttons
+@using OMSWebApp.Shared.StatisticsObjects;
+@using OMSWebApp.Client.Components;
 
-<div id="grid">
-    @if (StatisticsDetails == null)
-    {
-        <p><em>Loading...</em></p>
-    }
-    else
-    {
+@inject HttpClient client
+
+<div id="grid-main">
+    <div id="grid-cards">
         <div class="shadow">
-            <SfAccumulationChart Title="Mobile Browser Statistics" EnableAnimation="true" EnableSmartLabels="true">
-                <AccumulationChartSeriesCollection>
-                    <AccumulationChartSeries DataSource="@StatisticsDetails" XName="Browser" YName="Users" Name="Browser" ExplodeOffset="22" Explode="true" InnerRadius="60">
-                        <AccumulationDataLabelSettings Visible="true" Name="users" Position="AccumulationLabelPosition.Inside">
-                            <AccumulationChartDataLabelFont FontWeight="600"></AccumulationChartDataLabelFont>
-                        </AccumulationDataLabelSettings>
-                    </AccumulationChartSeries>
-                </AccumulationChartSeriesCollection>
-                <AccumulationChartTooltipSettings Enable="true"></AccumulationChartTooltipSettings>
-                <AccumulationChartLegendSettings Visible="@ShowLegend" Background="whitesmoke" Position="LegendPosition.Bottom"></AccumulationChartLegendSettings>
-                <AccumulationChartEvents OnAnimationComplete="@AnimationHandler"></AccumulationChartEvents>
-            </SfAccumulationChart>
+            <div class="gridtitle">OVERALL ORDERS QUANTITY</div>
+            <div id="gridvalue">34555345</div>
+            <hr style="height:0; background-color:lightgray" />
+            <div>(For last year)</div>
         </div>
-    }
-    <div class="shadow">
-        <SfAccumulationChart Title="Mobile Browser Statistics" EnableAnimation="true" EnableSmartLabels="true">
-            <AccumulationChartSeriesCollection>
-                <AccumulationChartSeries DataSource="@StatisticsDetails" XName="Browser" YName="Users" Name="Browser" ExplodeOffset="22" Explode="true" InnerRadius="0">
-                    <AccumulationDataLabelSettings Visible="true" Name="users" Position="AccumulationLabelPosition.Inside">
-                        <AccumulationChartDataLabelFont FontWeight="600"></AccumulationChartDataLabelFont>
-                    </AccumulationDataLabelSettings>
-                </AccumulationChartSeries>
-            </AccumulationChartSeriesCollection>
-            <AccumulationChartTooltipSettings Enable="true"></AccumulationChartTooltipSettings>
-            <AccumulationChartLegendSettings Visible="@ShowLegend" Background="whitesmoke" Position="LegendPosition.Bottom"></AccumulationChartLegendSettings>
-            <AccumulationChartEvents OnAnimationComplete="@AnimationHandler"></AccumulationChartEvents>
-        </SfAccumulationChart>
+        <div class="shadow">
+            <div class="gridtitle">MAX CHECK</div>
+            <div id="gridvalue">$ 5345.56</div>
+            <hr style="height:0; background-color:lightgray" />
+            <div>(For last year)</div>
+        </div>
+        <div class="shadow">
+            <div class="gridtitle">MAX CHECK</div>
+            <div id="gridvalue">$ 5345.56</div>
+            <hr style="height:0; background-color:lightgray" />
+            <div>(For last year)</div>
+        </div>
+        <div class="shadow">
+            <div class="gridtitle">MAX CHECK</div>
+            <div id="gridvalue">$ 5345.56</div>
+            <hr style="height:0; background-color:lightgray" />
+            <div>(For last year)</div>
+        </div>
+        <div class="shadow">
+            <div class="gridtitle">MAX CHECK</div>
+            <div id="gridvalue">$ 5345.56</div>
+            <hr style="height:0; background-color:lightgray" />
+            <div>(For last year)</div>
+        </div>
+
     </div>
 
-    <div class="shadow">
-        <SfAccumulationChart Title="Mobile Browser Statistics" EnableAnimation="true" EnableSmartLabels="true">
-            <AccumulationChartSeriesCollection>
-                <AccumulationChartSeries DataSource="@StatisticsDetails" XName="Browser" YName="Users" Name="Browser" ExplodeOffset="22" Explode="true" InnerRadius="30"
-                                         StartAngle="270" EndAngle="90">
-                    <AccumulationDataLabelSettings Visible="true" Name="users" Position="AccumulationLabelPosition.Inside">
-                        <AccumulationChartDataLabelFont FontWeight="600"></AccumulationChartDataLabelFont>
-                    </AccumulationDataLabelSettings>
-                </AccumulationChartSeries>
-            </AccumulationChartSeriesCollection>
-            <AccumulationChartTooltipSettings Enable="true"></AccumulationChartTooltipSettings>
-            <AccumulationChartLegendSettings Visible="@ShowLegend" Background="whitesmoke" Position="LegendPosition.Bottom"></AccumulationChartLegendSettings>
-            <AccumulationChartEvents OnAnimationComplete="@AnimationHandler"></AccumulationChartEvents>
-        </SfAccumulationChart>
+    <div id="grid-graphs">
+        @if (ordersByCountry == null)
+        {
+            <p><em>Loading...</em></p>
+        }
+        else
+        {
+            <div class="shadow">
+                <SfAccumulationChart Title="ORDERS BY COUNTRIES (TOP 10)" EnableAnimation="false" EnableSmartLabels="true">
+                    <AccumulationChartSeriesCollection>
+                        <AccumulationChartSeries DataSource="@ordersByCountry" XName="CountryName" YName="OrdersCount" Name="Country" ExplodeOffset="22" Explode="true" InnerRadius="60">
+                            <AccumulationDataLabelSettings Visible="true" Name="users" Position="AccumulationLabelPosition.Inside">
+                                <AccumulationChartDataLabelFont FontWeight="600"></AccumulationChartDataLabelFont>
+                            </AccumulationDataLabelSettings>
+                        </AccumulationChartSeries>
+                    </AccumulationChartSeriesCollection>
+                    <AccumulationChartTooltipSettings Enable="true"></AccumulationChartTooltipSettings>
+                    <AccumulationChartLegendSettings Visible="@ShowLegend" Background="whitesmoke" Position="LegendPosition.Bottom"></AccumulationChartLegendSettings>
+                    <AccumulationChartEvents OnAnimationComplete="@AnimationHandler"></AccumulationChartEvents>
+                </SfAccumulationChart>
+            </div>
+        }
+        @if (salesByCategories == null)
+        {
+            <p><em>Loading...</em></p>
+        }
+        else
+        {
+            <div class="shadow">
+                <SfAccumulationChart Title="SALES BY CATEGORIES" EnableAnimation="false" EnableSmartLabels="true">
+                    <AccumulationChartSeriesCollection>
+                        <AccumulationChartSeries DataSource="@salesByCategories" XName="CategoryName" YName="SalesSum" Name="Category" ExplodeOffset="22" Explode="true" InnerRadius="0">
+                            <AccumulationDataLabelSettings Visible="true" Name="users" Position="AccumulationLabelPosition.Inside">
+                                <AccumulationChartDataLabelFont FontWeight="600"></AccumulationChartDataLabelFont>
+                            </AccumulationDataLabelSettings>
+                        </AccumulationChartSeries>
+                    </AccumulationChartSeriesCollection>
+                    <AccumulationChartTooltipSettings Enable="true"></AccumulationChartTooltipSettings>
+                    <AccumulationChartLegendSettings Visible="@ShowLegend" Background="whitesmoke" Position="LegendPosition.Bottom"></AccumulationChartLegendSettings>
+                    <AccumulationChartEvents OnAnimationComplete="@AnimationHandler"></AccumulationChartEvents>
+                </SfAccumulationChart>
+            </div>
+        }
+        @if (salesByEmployee == null)
+        {
+            <p><em>Loading...</em></p>
+        }
+        else
+        {
+            <div class="shadow">
+                <SfAccumulationChart Title="SALES BY EMPLOYEES" EnableAnimation="false" EnableSmartLabels="true">
+                    <AccumulationChartSeriesCollection>
+                        <AccumulationChartSeries DataSource="@salesByEmployee" XName="LastName" YName="SalesSum" Name="Employee" ExplodeOffset="22" Explode="true" InnerRadius="30"
+                                                 StartAngle="270" EndAngle="90">
+                            <AccumulationDataLabelSettings Visible="true" Name="users" Position="AccumulationLabelPosition.Inside">
+                                <AccumulationChartDataLabelFont FontWeight="600"></AccumulationChartDataLabelFont>
+                            </AccumulationDataLabelSettings>
+                        </AccumulationChartSeries>
+                    </AccumulationChartSeriesCollection>
+                    <AccumulationChartTooltipSettings Enable="true"></AccumulationChartTooltipSettings>
+                    <AccumulationChartLegendSettings Visible="@ShowLegend" Background="whitesmoke" Position="LegendPosition.Bottom"></AccumulationChartLegendSettings>
+                    <AccumulationChartEvents OnAnimationComplete="@AnimationHandler"></AccumulationChartEvents>
+                </SfAccumulationChart>
+            </div>
+        }
+        @if (salesByEmployee == null)
+        {
+            <p><em>Loading...</em></p>
+        }
+        else
+        {
+            <div class="shadow">
+                <SfAccumulationChart Title="SALES BY EMPLOYEES" EnableAnimation="false" EnableSmartLabels="true">
+                    <AccumulationChartSeriesCollection>
+                        <AccumulationChartSeries DataSource="@salesByEmployee" XName="LastName" YName="SalesSum" Name="Employee" ExplodeOffset="22" Explode="true" InnerRadius="30"
+                                                 StartAngle="270" EndAngle="90">
+                            <AccumulationDataLabelSettings Visible="true" Name="users" Position="AccumulationLabelPosition.Inside">
+                                <AccumulationChartDataLabelFont FontWeight="600"></AccumulationChartDataLabelFont>
+                            </AccumulationDataLabelSettings>
+                        </AccumulationChartSeries>
+                    </AccumulationChartSeriesCollection>
+                    <AccumulationChartTooltipSettings Enable="true"></AccumulationChartTooltipSettings>
+                    <AccumulationChartLegendSettings Visible="@ShowLegend" Background="whitesmoke" Position="LegendPosition.Bottom"></AccumulationChartLegendSettings>
+                    <AccumulationChartEvents OnAnimationComplete="@AnimationHandler"></AccumulationChartEvents>
+                </SfAccumulationChart>
+            </div>
+        }
+
+        <div id="item1" class="shadow">
+            <SfChart Width="100%">
+                <ChartPrimaryXAxis ValueType="Syncfusion.Blazor.Charts.ValueType.Category"></ChartPrimaryXAxis>
+                <ChartSeriesCollection>
+                    <ChartSeries DataSource="@MedalDetails" XName="X" YName="YValue" ColumnSpacing="0.2" ColumnWidth="0.7" Type="ChartSeriesType.Bar">
+                    </ChartSeries>
+                    <ChartSeries DataSource="@MedalDetails" XName="X" YName="YValue1" ColumnSpacing="0.2" ColumnWidth="0.2" Type="ChartSeriesType.Bar">
+                    </ChartSeries>
+                </ChartSeriesCollection>
+            </SfChart>
+        </div>
+
+        <div id="item2" class="shadow">
+            <SfChart>
+                <ChartPrimaryXAxis ValueType="Syncfusion.Blazor.Charts.ValueType.Category"></ChartPrimaryXAxis>
+                <ChartSeriesCollection>
+                    <ChartSeries DataSource="@MedalDetails1" Name="Gold" XName="Country" Width="2" Opacity="1" YName="Gold" Type="ChartSeriesType.Column">
+                    </ChartSeries>
+                    <ChartSeries DataSource="@MedalDetails1" Name="Silver" XName="Country" Width="2" Opacity="1" YName="Silver" Type="ChartSeriesType.Column">
+                    </ChartSeries>
+                    <ChartSeries DataSource="@MedalDetails1" Name="bronze" XName="Country" Width="2" Opacity="1" YName="Bronze" Type="ChartSeriesType.Column">
+                    </ChartSeries>
+                </ChartSeriesCollection>
+            </SfChart>
+        </div>
     </div>
 
-    <div class="shadow">
-        <SfChart Width="100%">
-            <ChartPrimaryXAxis ValueType="Syncfusion.Blazor.Charts.ValueType.Category"></ChartPrimaryXAxis>
-            <ChartSeriesCollection>
-                <ChartSeries DataSource="@MedalDetails" XName="X" YName="YValue" ColumnSpacing="0.2" ColumnWidth="0.7" Type="ChartSeriesType.Bar">
-                </ChartSeries>
-                <ChartSeries DataSource="@MedalDetails" XName="X" YName="YValue1" ColumnSpacing="0.2" ColumnWidth="0.2" Type="ChartSeriesType.Bar">
-                </ChartSeries>
-            </ChartSeriesCollection>
-        </SfChart>
-    </div>
-
-    <div id="item1" class="shadow">
-        <SfChart>
-            <ChartPrimaryXAxis ValueType="Syncfusion.Blazor.Charts.ValueType.Category"></ChartPrimaryXAxis>
-            <ChartSeriesCollection>
-                <ChartSeries DataSource="@MedalDetails1" Name="Gold" XName="Country" Width="2" Opacity="1" YName="Gold" Type="ChartSeriesType.Column">
-                </ChartSeries>
-                <ChartSeries DataSource="@MedalDetails1" Name="Silver" XName="Country" Width="2" Opacity="1" YName="Silver" Type="ChartSeriesType.Column">
-                </ChartSeries>
-                <ChartSeries DataSource="@MedalDetails1" Name="bronze" XName="Country" Width="2" Opacity="1" YName="Bronze" Type="ChartSeriesType.Column">
-                </ChartSeries>
-            </ChartSeriesCollection>
-        </SfChart>
-    </div>
 </div>
+
+<style>
+    #grid-main {
+        display: grid;
+        background-color: whitesmoke;
+        grid-template-rows: auto auto;
+        grid-gap: 20px;
+    }
+
+    #grid-cards {
+        display: grid;
+        grid-row: 1;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        grid-gap: 20px;
+    }
+
+        #grid-cards > div {
+            padding: 20px;
+            background-color: white;
+            height:auto;
+        }
+
+    #grid-graphs {
+        display: grid;
+        grid-row: 2;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        grid-gap: 20px;
+    }
+
+        #grid-graphs > div {
+            padding: 20px;
+            text-align: center;
+            background-color: white;
+        }
+
+    #item1 {
+        grid-row-start: 2;
+        grid-row-end: 2;
+        grid-column-start: 1;
+        grid-column-end: 3;
+    }
+
+    #item2 {
+        grid-row-start: 2;
+        grid-row-end: 2;
+        grid-column-start: 3;
+        grid-column-end: 5;
+    }
+
+    .gridtitle {
+        font-size: 16px;
+        text-align: left;
+        font-weight: 100;
+        color: darkblue;
+    }
+
+    #gridvalue {
+        font-size: 38px;
+        text-align: left;
+        font-weight: normal;
+        color: crimson;
+    }
+</style>
 
 @code
 {
-    public class Statistics
+    List<OrdersByCountry> ordersByCountry;
+    List<SalesByCategory> salesByCategories;
+    List<SalesByEmployee> salesByEmployee;
+
+    protected override async Task OnInitializedAsync()
     {
-        public string Browser;
-        public double Users;
+        //#if DEBUG
+        //        await Task.Delay(10000);
+        //#endif
+
+        ordersByCountry = await client.GetFromJsonAsync<List<OrdersByCountry>>("api/statistics/GetOrdersByCountries");
+        salesByCategories = await client.GetFromJsonAsync<List<SalesByCategory>>("api/Statistics/GetSalesByCategories");
+        salesByEmployee = await client.GetFromJsonAsync<List<SalesByEmployee>>("api/Statistics/GetSalesByEmployees");
     }
 
-    public List<Statistics> StatisticsDetails = new List<Statistics>
-{
-        new Statistics { Browser = "Chrome", Users = 37 },
-        new Statistics { Browser = "UC Browser", Users = 17 },
-        new Statistics { Browser = "iPhone", Users = 19 },
-        new Statistics { Browser = "Others", Users = 4  },
-        new Statistics { Browser = "Opera", Users = 11 },
-        new Statistics { Browser = "Android", Users = 12 },
-    };
     public class ChartData
     {
         public string X;
@@ -141,24 +283,3 @@
         ShowLegend = true;
     }
 }
-<style>
-    #grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        grid-template-rows: 1fr 1fr 1fr;
-        grid-gap: 1vw;
-    }
-
-        #grid > div {
-            font-size: 5vw;
-            padding: 2px;
-            text-align: center;
-        }
-
-    #item1 {
-        grid-row-start: 2;
-        grid-column-start: 2;
-        grid-row-end: 2;
-        grid-column-end: 4;
-    }
-</style>
