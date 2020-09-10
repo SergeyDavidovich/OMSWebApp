@@ -11,34 +11,34 @@
 <div id="grid-main">
     <div id="grid-cards">
         <div class="shadow">
-            <div class="gridtitle">OVERALL ORDERS QUANTITY</div>
-            <div id="gridvalue">34555345</div>
+            <div class="cardtitle">OVERALL ORDERS QUANTITY</div>
+            <div id="cardcontent">3455</div>
             <hr style="height:0; background-color:lightgray" />
-            <div>(For last year)</div>
+            <div id="cardfooter">(For last year)</div>
         </div>
         <div class="shadow">
-            <div class="gridtitle">MAX CHECK</div>
-            <div id="gridvalue">$ 5345.56</div>
+            <div class="cardtitle">MAX CHECK</div>
+            <div id="cardcontent">$ 5345.56</div>
             <hr style="height:0; background-color:lightgray" />
-            <div>(For last year)</div>
+            <div id="cardfooter">(For last year)</div>
         </div>
         <div class="shadow">
-            <div class="gridtitle">MAX CHECK</div>
-            <div id="gridvalue">$ 5345.56</div>
+            <div class="cardtitle">MAX CHECK</div>
+            <div id="cardcontent">$ 5345.56</div>
             <hr style="height:0; background-color:lightgray" />
-            <div>(For last year)</div>
+            <div id="cardfooter">(For last year)</div>
         </div>
         <div class="shadow">
-            <div class="gridtitle">MAX CHECK</div>
-            <div id="gridvalue">$ 5345.56</div>
+            <div class="cardtitle">MAX CHECK</div>
+            <div id="cardcontent">$ 5345.56</div>
             <hr style="height:0; background-color:lightgray" />
-            <div>(For last year)</div>
+            <div id="cardfooter">(For last year)</div>
         </div>
         <div class="shadow">
-            <div class="gridtitle">MAX CHECK</div>
-            <div id="gridvalue">$ 5345.56</div>
+            <div class="cardtitle">MAX CHECK</div>
+            <div id="cardcontent">$ 5345.56</div>
             <hr style="height:0; background-color:lightgray" />
-            <div>(For last year)</div>
+            <div id="cardfooter">(For last year)</div>
         </div>
 
     </div>
@@ -176,7 +176,7 @@
     }
 
         #grid-cards > div {
-            padding: 20px;
+            padding: 10px;
             background-color: white;
             height:auto;
         }
@@ -209,18 +209,24 @@
         grid-column-end: 5;
     }
 
-    .gridtitle {
+    .cardtitle {
         font-size: 16px;
         text-align: left;
         font-weight: 100;
         color: darkblue;
     }
 
-    #gridvalue {
+    #cardcontent {
         font-size: 38px;
         text-align: left;
         font-weight: normal;
         color: crimson;
+    }
+    #cardfooter {
+        font-size: 12px;
+        text-align: right;
+        font-weight: normal;
+        color: darkblue;
     }
 </style>
 
