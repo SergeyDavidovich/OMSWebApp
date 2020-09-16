@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections;
 using OMSWebApp.Shared.Models;
-using OMSWebApp.Server.ApplicationDBContext;
+using OMSWebApp.Server.Data;
 
 namespace OMSWebService.Controllers
 {
@@ -15,9 +15,9 @@ namespace OMSWebService.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        private readonly NorthwindContext _context;
+        private readonly ApplicationDBContext _context;
 
-        public ProductsController(NorthwindContext context)
+        public ProductsController(ApplicationDBContext context)
         {
             _context = context;
         }

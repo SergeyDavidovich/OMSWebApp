@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using OMSWebApp.Server.ApplicationDBContext;
+using OMSWebApp.Server.Data;
 using OMSWebApp.Shared.Models;
 
 namespace OMSWebApp.Server.Controllers
@@ -13,9 +13,9 @@ namespace OMSWebApp.Server.Controllers
     [ApiController]
     public class CategoriesController : ControllerBase
     {
-        private readonly NorthwindContext _context;
+        private readonly ApplicationDBContext _context;
 
-        public CategoriesController(NorthwindContext context)
+        public CategoriesController(ApplicationDBContext context)
         {
             _context = context;
         }

@@ -14,33 +14,32 @@
             <div class="cardtitle">OVERALL ORDERS QUANTITY</div>
             <div id="cardcontent">3455</div>
             <hr style="height:0; background-color:lightgray" />
-            <div id="cardfooter">(For last year)</div>
+            <div id="cardfooter">(for @currenYear year)</div>
         </div>
         <div class="shadow">
             <div class="cardtitle">MAX CHECK</div>
             <div id="cardcontent">$ 5345.56</div>
             <hr style="height:0; background-color:lightgray" />
-            <div id="cardfooter">(For last year)</div>
+            <div id="cardfooter">(for @currenYear year)</div>
         </div>
         <div class="shadow">
             <div class="cardtitle">MAX CHECK</div>
             <div id="cardcontent">$ 5345.56</div>
             <hr style="height:0; background-color:lightgray" />
-            <div id="cardfooter">(For last year)</div>
+            <div id="cardfooter">(For @currenYear year)</div>
         </div>
         <div class="shadow">
             <div class="cardtitle">MAX CHECK</div>
             <div id="cardcontent">$ 5345.56</div>
             <hr style="height:0; background-color:lightgray" />
-            <div id="cardfooter">(For last year)</div>
+            <div id="cardfooter">(for @currenYear year)</div>
         </div>
         <div class="shadow">
             <div class="cardtitle">MAX CHECK</div>
             <div id="cardcontent">$ 5345.56</div>
             <hr style="height:0; background-color:lightgray" />
-            <div id="cardfooter">(For last year)</div>
+            <div id="cardfooter">(for @currenYear year)</div>
         </div>
-
     </div>
 
     <div id="grid-graphs">
@@ -52,8 +51,18 @@
         {
             <div class="shadow">
                 <SfAccumulationChart Title="ORDERS BY COUNTRIES (TOP 10)" EnableAnimation="false" EnableSmartLabels="true">
+                    <AccumulationChartAnnotations>
+                        <AccumulationChartAnnotation X="50%" Y="44%" CoordinateUnits="Units.Pixel" Region="Regions.Chart">
+                            <ContentTemplate>
+                                <div>
+                                    <div style="font-size:16px;">TOTAL ORDERS</div>
+                                    <div style="height:auto; width:auto; font-size:42px; text-align:center; color:crimson;">12300</div>
+                                </div>
+                            </ContentTemplate>
+                        </AccumulationChartAnnotation>
+                    </AccumulationChartAnnotations>
                     <AccumulationChartSeriesCollection>
-                        <AccumulationChartSeries DataSource="@ordersByCountry" XName="CountryName" YName="OrdersCount" Name="Country" ExplodeOffset="22" Explode="true" InnerRadius="60">
+                        <AccumulationChartSeries DataSource="@ordersByCountry" XName="CountryName" YName="OrdersCount" Name="Country" ExplodeOffset="22" Explode="true" InnerRadius="60%">
                             <AccumulationDataLabelSettings Visible="true" Name="users" Position="AccumulationLabelPosition.Inside">
                                 <AccumulationChartDataLabelFont FontWeight="600"></AccumulationChartDataLabelFont>
                             </AccumulationDataLabelSettings>
@@ -94,6 +103,16 @@
         {
             <div class="shadow">
                 <SfAccumulationChart Title="SALES BY EMPLOYEES" EnableAnimation="false" EnableSmartLabels="true">
+                    <AccumulationChartAnnotations>
+                        <AccumulationChartAnnotation X="66%" Y="18%" CoordinateUnits="Units.Pixel" Region="Regions.Chart">
+                            <ContentTemplate>
+                                <div>
+                                    <div style="font-size:14px; text-align:right">TOTAL SUM</div>
+                                    <div style="height:auto; width:auto; font-size:34px; text-align:right; color:crimson;">$456123</div>
+                                </div>
+                            </ContentTemplate>
+                        </AccumulationChartAnnotation>
+                    </AccumulationChartAnnotations>
                     <AccumulationChartSeriesCollection>
                         <AccumulationChartSeries DataSource="@salesByEmployee" XName="LastName" YName="SalesSum" Name="Employee" ExplodeOffset="22" Explode="true" InnerRadius="30"
                                                  StartAngle="270" EndAngle="90">
@@ -116,6 +135,16 @@
         {
             <div class="shadow">
                 <SfAccumulationChart Title="SALES BY EMPLOYEES" EnableAnimation="false" EnableSmartLabels="true">
+                    <AccumulationChartAnnotations>
+                        <AccumulationChartAnnotation X="66%" Y="18%" CoordinateUnits="Units.Pixel" Region="Regions.Chart">
+                            <ContentTemplate>
+                                <div>
+                                    <div style="font-size:14px; text-align:right">TOTAL SUM</div>
+                                    <div style="height:auto; width:auto; font-size:34px; text-align:right; color:crimson;">$456123</div>
+                                </div>
+                            </ContentTemplate>
+                        </AccumulationChartAnnotation>
+                    </AccumulationChartAnnotations>
                     <AccumulationChartSeriesCollection>
                         <AccumulationChartSeries DataSource="@salesByEmployee" XName="LastName" YName="SalesSum" Name="Employee" ExplodeOffset="22" Explode="true" InnerRadius="30"
                                                  StartAngle="270" EndAngle="90">
@@ -130,19 +159,17 @@
                 </SfAccumulationChart>
             </div>
         }
-
         <div id="item1" class="shadow">
             <SfChart Width="100%">
                 <ChartPrimaryXAxis ValueType="Syncfusion.Blazor.Charts.ValueType.Category"></ChartPrimaryXAxis>
                 <ChartSeriesCollection>
-                    <ChartSeries DataSource="@MedalDetails" XName="X" YName="YValue" ColumnSpacing="0.2" ColumnWidth="0.7" Type="ChartSeriesType.Bar">
+                    <ChartSeries DataSource="@MedalDetails" XName="X" YName="YValue" ColumnSpacing="0.2" ColumnWidth="0.7" Type="ChartSeriesType.Area">
                     </ChartSeries>
-                    <ChartSeries DataSource="@MedalDetails" XName="X" YName="YValue1" ColumnSpacing="0.2" ColumnWidth="0.2" Type="ChartSeriesType.Bar">
+                    <ChartSeries DataSource="@MedalDetails" XName="X" YName="YValue1" ColumnSpacing="0.2" ColumnWidth="0.2" Type="ChartSeriesType.Area">
                     </ChartSeries>
                 </ChartSeriesCollection>
             </SfChart>
         </div>
-
         <div id="item2" class="shadow">
             <SfChart>
                 <ChartPrimaryXAxis ValueType="Syncfusion.Blazor.Charts.ValueType.Category"></ChartPrimaryXAxis>
@@ -157,7 +184,6 @@
             </SfChart>
         </div>
     </div>
-
 </div>
 
 <style>
@@ -174,11 +200,10 @@
         grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
         grid-gap: 20px;
     }
-
         #grid-cards > div {
             padding: 10px;
             background-color: white;
-            height:auto;
+            height: auto;
         }
 
     #grid-graphs {
@@ -188,7 +213,6 @@
         grid-template-rows: 1fr 1fr;
         grid-gap: 20px;
     }
-
         #grid-graphs > div {
             padding: 20px;
             text-align: center;
@@ -209,7 +233,7 @@
         grid-column-end: 5;
     }
 
-    .cardtitle {
+    #cardtitle {
         font-size: 16px;
         text-align: left;
         font-weight: 100;
@@ -222,6 +246,7 @@
         font-weight: normal;
         color: crimson;
     }
+
     #cardfooter {
         font-size: 12px;
         text-align: right;
@@ -235,6 +260,7 @@
     List<OrdersByCountry> ordersByCountry;
     List<SalesByCategory> salesByCategories;
     List<SalesByEmployee> salesByEmployee;
+    int currenYear;
 
     protected override async Task OnInitializedAsync()
     {
@@ -245,6 +271,8 @@
         ordersByCountry = await client.GetFromJsonAsync<List<OrdersByCountry>>("api/statistics/GetOrdersByCountries");
         salesByCategories = await client.GetFromJsonAsync<List<SalesByCategory>>("api/Statistics/GetSalesByCategories");
         salesByEmployee = await client.GetFromJsonAsync<List<SalesByEmployee>>("api/Statistics/GetSalesByEmployees");
+
+        currenYear = DateTime.Now.Year;
     }
 
     public class ChartData

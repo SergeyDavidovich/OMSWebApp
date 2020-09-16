@@ -4,15 +4,15 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using OMSWebApp.Shared.Models;
 
-namespace OMSWebApp.Server.ApplicationDBContext
+namespace OMSWebApp.Server.Data
 {
-    public partial class NorthwindContext : DbContext
+    public partial class ApplicationDBContext : DbContext
     {
-        public NorthwindContext()
+        public ApplicationDBContext()
         {
         }
 
-        public NorthwindContext(DbContextOptions<NorthwindContext> options)
+        public ApplicationDBContext(DbContextOptions<ApplicationDBContext> options)
             : base(options)
         {
         }

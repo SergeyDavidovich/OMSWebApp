@@ -7,7 +7,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using OMSWebApp.Server.ApplicationDBContext;
+using OMSWebApp.Server.Data;
+using OMSWebApp.Server.Models;
+using Microsoft.AspNetCore.Identity;
+using System.Threading.Tasks;
 
 namespace OMSWebApp.Server
 {
@@ -20,16 +23,37 @@ namespace OMSWebApp.Server
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            // adding DBContexts
+            string sql_connection = Configuration.GetConnectionString("SQLServerConnection");
+
+            services.AddDbContext<ApplicationDBContext>(options => options.UseSqlServer(sql_connection));
+
+            string sqlite_connection = Configuration.GetConnectionString("SQLiteConnection");
+
+            services.AddDbContext<IdentityContext>(options => options.UseSqlite(sqlite_connection));
+            //
+
+            //services.AddIdentity<ApplicationUser, IdentityRole>()
+            //   .AddEntityFrameworkStores<IdentityContext>()
+            //   .AddDefaultTokenProviders();
+
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDBContext>();
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.Cookie.HttpOnly = false;
+                options.Events.OnRedirectToLogin = context =>
+                {
+                    context.Response.StatusCode = 401;
+                    return Task.CompletedTask;
+                };
+            });
 
             services.AddControllersWithViews();
             services.AddRazorPages();
-            services.AddDbContext<NorthwindContext>(
-                options => options.UseSqlServer(Configuration.GetConnectionString("SQLServerConnection"))
-                );
             // https://stackoverflow.com/questions/59199593/net-core-3-0-possible-object-cycle-was-detected-which-is-not-supported
             services.AddControllers().AddNewtonsoftJson(options =>
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
@@ -55,6 +79,8 @@ namespace OMSWebApp.Server
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

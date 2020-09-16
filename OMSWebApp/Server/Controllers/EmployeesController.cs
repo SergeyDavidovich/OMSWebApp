@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using OMSWebApp.Server.ApplicationDBContext;
+using OMSWebApp.Server.Data;
 using OMSWebApp.Shared.Models;
 
 
@@ -15,9 +15,9 @@ namespace OMSWebMini.Controllers
     [ApiController]
     public class EmployeesController : ControllerBase
     {
-        private readonly NorthwindContext _context;
+        private readonly ApplicationDBContext _context;
 
-        public EmployeesController(NorthwindContext context)
+        public EmployeesController(ApplicationDBContext context)
         {
             _context = context;
         }
