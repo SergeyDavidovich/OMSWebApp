@@ -64,6 +64,7 @@
 </div>
 
 @code {
+    #region Declarations
 
     List<Order> orders;
     Order selectedOrder;
@@ -75,6 +76,8 @@
     string orderDate;
     string employeeId;
     string totalOrder;
+    
+    #endregion
 
     protected override async Task OnInitializedAsync()
     {

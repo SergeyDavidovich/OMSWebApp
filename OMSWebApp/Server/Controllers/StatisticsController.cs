@@ -52,27 +52,62 @@ namespace OMSWebApp.Server.Controllers
 
             return salesByCategories;
         }
-        // GET: api/Statistics/GetSalesByEmployees
+
+        // GET: api/Statistics/GetCustomersByCountries
         [Route("[action]")]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<SalesByEmployee>>> GetSalesByEmployees()
+        public async Task<IEnumerable<CustomersByCountry>> GetCustomersByCountries()
         {
-            var employees = await _context.Employees.Include(employee => employee.Orders).
-                ThenInclude(employeeOrder => employeeOrder.OrderDetails).
-                ToListAsync();
+            var groupedCustomers = _context.Customers.GroupBy(cust => cust.Country);
 
-            return await Task.Run(() =>
+            var customersByCountries = await groupedCustomers.Select(customerGroup => new CustomersByCountry
             {
-                var salesByEmployees = employees.Select(employee => new SalesByEmployee
-                {
-                    LastName = employee.LastName,
-                    SalesSum = employee.Orders.Sum(order => order.OrderDetails.Sum(orderDetail => orderDetail.Quantity * orderDetail.UnitPrice))
-                }).ToList();
+                CountryName = customerGroup.Key,
+                CustomerCount = customerGroup.Count()
+            })
+                .OrderByDescending(customersByCountries => customersByCountries.CustomerCount).Take(10).ToListAsync();
 
-                return salesByEmployees;
-            });
+            return customersByCountries;
         }
 
+        // GET: api/Statistics/GetProductsByCategories
+        [Route("[action]")]
+        [HttpGet]
+        public async Task<IEnumerable<ProductsByCategory>> GetProductsByCategories()
+        {
+            var groupedProducts = _context.Products.GroupBy(prod => prod.Category.CategoryName);
+
+            var productsByCategories = await groupedProducts.Select(productGroup => new ProductsByCategory()
+            {
+                CategoryName = productGroup.Key,
+                ProductsCount = productGroup.Count()
+            })
+                .OrderByDescending(productsByCategories => productsByCategories.ProductsCount).ToListAsync();
+
+            return productsByCategories;
+        }
+
+
+        //GET: api/Statistics/GetSalesByCountries
+        [Route("[action]")]
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<object>>> GetSalesByCountries()
+        {
+            var groupedDetails = _context.OrderDetails.GroupBy(o => o.Order.Customer.Country);
+
+            var salesByCountries = await groupedDetails.Select(groupeDetail => new SalesByCountry()
+            {
+                CountryName = groupeDetail.Key,
+                CountrySum = groupeDetail.Sum(g => g.Quantity * g.UnitPrice)
+            }).OrderByDescending(salesBycountries=>salesBycountries.CountrySum).Take(10).ToListAsync();
+          
+            return salesByCountries;
+        }
+
+
+        //public async Task<IEnumerable<object>> GetPurchacesByCustomers() { return null; }
+
+        //public async Task<IEnumerable<object>> GetSalesByEmployees() { return null; }
 
 
 

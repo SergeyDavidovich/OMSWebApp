@@ -14,6 +14,8 @@ using Microsoft.Extensions.Logging;
 using Syncfusion.Blazor;
 using System.Globalization;
 using System.Threading;
+using OMSWebApp.Client.Services;
+using Microsoft.AspNetCore.Components.Authorization;
 
 namespace OMSWebApp.Client
 {
@@ -31,6 +33,12 @@ namespace OMSWebApp.Client
 
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("app");
+
+            builder.Services.AddOptions();
+            builder.Services.AddAuthorizationCore();
+            builder.Services.AddScoped<CustomStateProvider>();
+            builder.Services.AddScoped<AuthenticationStateProvider>(s => s.GetRequiredService<CustomStateProvider>());
+            builder.Services.AddScoped<IAuthService, AuthService>();
 
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
             builder.Services.AddSyncfusionBlazor();

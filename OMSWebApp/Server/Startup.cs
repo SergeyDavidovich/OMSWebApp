@@ -26,14 +26,15 @@ namespace OMSWebApp.Server
         public void ConfigureServices(IServiceCollection services)
         {
             // adding DBContexts
-            string sql_connection = Configuration.GetConnectionString("SQLServerConnection");
 
+            string sql_connection = Configuration.GetConnectionString("SQLServerConnection");
             services.AddDbContext<ApplicationDBContext>(options => options.UseSqlServer(sql_connection));
 
-            string sqlite_connection = Configuration.GetConnectionString("SQLiteConnection");
+            //string sqlite_connection = Configuration.GetConnectionString("SQLiteConnection");
+            //services.AddDbContext<ApplicationDBContext>(options => options.UseSqlite(sqlite_connection));
 
-            services.AddDbContext<IdentityContext>(options => options.UseSqlite(sqlite_connection));
-            //
+            string sqlite_identity_connection = Configuration.GetConnectionString("SQLiteIdentityConnection");
+            services.AddDbContext<IdentityContext>(options => options.UseSqlite(sqlite_identity_connection));
 
             //services.AddIdentity<ApplicationUser, IdentityRole>()
             //   .AddEntityFrameworkStores<IdentityContext>()

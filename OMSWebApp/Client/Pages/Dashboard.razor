@@ -26,7 +26,7 @@
             <div class="cardtitle">MAX CHECK</div>
             <div id="cardcontent">$ 5345.56</div>
             <hr style="height:0; background-color:lightgray" />
-            <div id="cardfooter">(For @currenYear year)</div>
+            <div id="cardfooter">(for @currenYear year)</div>
         </div>
         <div class="shadow">
             <div class="cardtitle">MAX CHECK</div>
@@ -55,8 +55,8 @@
                         <AccumulationChartAnnotation X="50%" Y="44%" CoordinateUnits="Units.Pixel" Region="Regions.Chart">
                             <ContentTemplate>
                                 <div>
-                                    <div style="font-size:16px;">TOTAL ORDERS</div>
-                                    <div style="height:auto; width:auto; font-size:42px; text-align:center; color:crimson;">12300</div>
+                                    <div style="font-size:16px; border-bottom:1px solid black">TOTAL ORDERS</div>
+                                    <div style="height:auto; width:auto; font-size:42px; text-align:center; color:crimson;">@totalOrders</div>
                                 </div>
                             </ContentTemplate>
                         </AccumulationChartAnnotation>
@@ -95,14 +95,14 @@
                 </SfAccumulationChart>
             </div>
         }
-        @if (salesByEmployee == null)
+        @if (customersByCountries == null)
         {
             <p><em>Loading...</em></p>
         }
         else
         {
             <div class="shadow">
-                <SfAccumulationChart Title="SALES BY EMPLOYEES" EnableAnimation="false" EnableSmartLabels="true">
+                <SfAccumulationChart Title="CUSTOMERS BY COUNTRIES" EnableAnimation="false" EnableSmartLabels="true">
                     <AccumulationChartAnnotations>
                         <AccumulationChartAnnotation X="66%" Y="18%" CoordinateUnits="Units.Pixel" Region="Regions.Chart">
                             <ContentTemplate>
@@ -114,7 +114,7 @@
                         </AccumulationChartAnnotation>
                     </AccumulationChartAnnotations>
                     <AccumulationChartSeriesCollection>
-                        <AccumulationChartSeries DataSource="@salesByEmployee" XName="LastName" YName="SalesSum" Name="Employee" ExplodeOffset="22" Explode="true" InnerRadius="30"
+                        <AccumulationChartSeries DataSource="@customersByCountries" XName="CountryName" YName="CustomerCount" Name="Country" ExplodeOffset="22" Explode="true" InnerRadius="30"
                                                  StartAngle="270" EndAngle="90">
                             <AccumulationDataLabelSettings Visible="true" Name="users" Position="AccumulationLabelPosition.Inside">
                                 <AccumulationChartDataLabelFont FontWeight="600"></AccumulationChartDataLabelFont>
@@ -127,14 +127,14 @@
                 </SfAccumulationChart>
             </div>
         }
-        @if (salesByEmployee == null)
+        @if (productsByCategories == null)
         {
             <p><em>Loading...</em></p>
         }
         else
         {
             <div class="shadow">
-                <SfAccumulationChart Title="SALES BY EMPLOYEES" EnableAnimation="false" EnableSmartLabels="true">
+                <SfAccumulationChart Title="PRODUCTS BY CATEGORIES" EnableAnimation="false" EnableSmartLabels="true">
                     <AccumulationChartAnnotations>
                         <AccumulationChartAnnotation X="66%" Y="18%" CoordinateUnits="Units.Pixel" Region="Regions.Chart">
                             <ContentTemplate>
@@ -146,7 +146,7 @@
                         </AccumulationChartAnnotation>
                     </AccumulationChartAnnotations>
                     <AccumulationChartSeriesCollection>
-                        <AccumulationChartSeries DataSource="@salesByEmployee" XName="LastName" YName="SalesSum" Name="Employee" ExplodeOffset="22" Explode="true" InnerRadius="30"
+                        <AccumulationChartSeries DataSource="@productsByCategories" XName="CategoryName" YName="ProductsCount" Name="Category" ExplodeOffset="22" Explode="true" InnerRadius="30"
                                                  StartAngle="270" EndAngle="90">
                             <AccumulationDataLabelSettings Visible="true" Name="users" Position="AccumulationLabelPosition.Inside">
                                 <AccumulationChartDataLabelFont FontWeight="600"></AccumulationChartDataLabelFont>
@@ -159,17 +159,24 @@
                 </SfAccumulationChart>
             </div>
         }
-        <div id="item1" class="shadow">
-            <SfChart Width="100%">
-                <ChartPrimaryXAxis ValueType="Syncfusion.Blazor.Charts.ValueType.Category"></ChartPrimaryXAxis>
-                <ChartSeriesCollection>
-                    <ChartSeries DataSource="@MedalDetails" XName="X" YName="YValue" ColumnSpacing="0.2" ColumnWidth="0.7" Type="ChartSeriesType.Area">
-                    </ChartSeries>
-                    <ChartSeries DataSource="@MedalDetails" XName="X" YName="YValue1" ColumnSpacing="0.2" ColumnWidth="0.2" Type="ChartSeriesType.Area">
-                    </ChartSeries>
-                </ChartSeriesCollection>
-            </SfChart>
-        </div>
+        @if (salesByCountries == null)
+        {
+            <p><em>Loading...</em></p>
+        }
+        else
+        {
+            <div id="item1" class="shadow">
+                <SfChart Width="100%">
+                    <ChartPrimaryXAxis ValueType="Syncfusion.Blazor.Charts.ValueType.Category"></ChartPrimaryXAxis>
+                    <ChartSeriesCollection>
+                        <ChartSeries DataSource="@salesByCountries" XName="CountryName" YName="CountrySum" ColumnSpacing="0.2" ColumnWidth="0.7" Type="ChartSeriesType.Bar">
+                        </ChartSeries>
+                        @*<ChartSeries DataSource="@MedalDetails" XName="X" YName="YValue1" ColumnSpacing="0.2" ColumnWidth="0.2" Type="ChartSeriesType.Area">
+                            </ChartSeries>*@
+                    </ChartSeriesCollection>
+                </SfChart>
+            </div>
+        }
         <div id="item2" class="shadow">
             <SfChart>
                 <ChartPrimaryXAxis ValueType="Syncfusion.Blazor.Charts.ValueType.Category"></ChartPrimaryXAxis>
@@ -189,7 +196,7 @@
 <style>
     #grid-main {
         display: grid;
-        background-color: whitesmoke;
+        background-color: lightgray;
         grid-template-rows: auto auto;
         grid-gap: 20px;
     }
@@ -200,6 +207,7 @@
         grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
         grid-gap: 20px;
     }
+
         #grid-cards > div {
             padding: 10px;
             background-color: white;
@@ -213,6 +221,7 @@
         grid-template-rows: 1fr 1fr;
         grid-gap: 20px;
     }
+
         #grid-graphs > div {
             padding: 20px;
             text-align: center;
@@ -257,10 +266,16 @@
 
 @code
 {
+    int currenYear;
+    int totalOrders;
     List<OrdersByCountry> ordersByCountry;
     List<SalesByCategory> salesByCategories;
-    List<SalesByEmployee> salesByEmployee;
-    int currenYear;
+    List<CustomersByCountry> customersByCountries;
+    List<ProductsByCategory> productsByCategories;
+    List<SalesByCountry> salesByCountries;
+
+
+    //List<SalesByEmployee> salesByEmployee;
 
     protected override async Task OnInitializedAsync()
     {
@@ -268,11 +283,19 @@
         //        await Task.Delay(10000);
         //#endif
 
+        currenYear = DateTime.Now.Year;
+
         ordersByCountry = await client.GetFromJsonAsync<List<OrdersByCountry>>("api/statistics/GetOrdersByCountries");
         salesByCategories = await client.GetFromJsonAsync<List<SalesByCategory>>("api/Statistics/GetSalesByCategories");
-        salesByEmployee = await client.GetFromJsonAsync<List<SalesByEmployee>>("api/Statistics/GetSalesByEmployees");
+        customersByCountries = await client.GetFromJsonAsync<List<CustomersByCountry>>("api/Statistics/GetCustomersByCountries");
+        productsByCategories = await client.GetFromJsonAsync<List<ProductsByCategory>>("api/Statistics/GetProductsByCategories");
+        salesByCountries = await client.GetFromJsonAsync<List<SalesByCountry>>("api/Statistics/GetSalesByCountries");
 
-        currenYear = DateTime.Now.Year;
+        totalOrders = ordersByCountry.Sum(o => o.OrdersCount);
+        //salesByEmployee = await client.GetFromJsonAsync<List<SalesByEmployee>>("api/Statistics/GetSalesByEmployees");
+
+
+
     }
 
     public class ChartData
