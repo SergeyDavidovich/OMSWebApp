@@ -41,7 +41,7 @@ namespace OMSWebApp.Server
             //   .AddDefaultTokenProviders();
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDBContext>();
+                .AddEntityFrameworkStores<IdentityContext>();
 
             services.ConfigureApplicationCookie(options =>
             {
