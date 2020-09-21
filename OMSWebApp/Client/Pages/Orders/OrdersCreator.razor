@@ -1,6 +1,8 @@
 ﻿@layout OrdersLayout
 @page "/orders/orderscreator"
 
+@using System.Collections.ObjectModel
+@using System.ComponentModel;
 @using Syncfusion.Blazor.Grids
 @using OMSWebApp.Shared.Models
 @using OMSWebApp.Client.Components
@@ -12,9 +14,9 @@
 <div id="grid">
     <div class="card shadow">
         <SfGrid @ref="productsGrid" DataSource="@products" Height="600" Width="auto" AllowPaging="false" AllowSelection="true" EnableAltRow="true">
-            <GridSelectionSettings Type="SelectionType.Multiple"></GridSelectionSettings>
+            <GridSelectionSettings Type="SelectionType.Multiple" EnableToggle="true"></GridSelectionSettings>
             <GridColumns>
-                <GridColumn Type="ColumnType.CheckBox" Width="50"></GridColumn>
+                <GridColumn Type="ColumnType.CheckBox" Width="50" HeaderText="#"></GridColumn>
                 <GridColumn Field=@nameof(Product.ProductId) HeaderText="ID"
                             HeaderTextAlign="TextAlign.Center" TextAlign="TextAlign.Center" AutoFit="false" Width="50"></GridColumn>
                 <GridColumn Field=@nameof(Product.ProductName) HeaderText="PRODUCT NAME"
@@ -49,44 +51,49 @@
 @code {
 
     SfGrid<Product> productsGrid;
-
     List<Product> products;
     List<Product> selectedProducts;
-    List<OrderDetail> selectedDetails { get; set; }
+
+    OrderDetail detail;
+    ObservableCollection<OrderDetail> selectedDetails { get; set; }
 
 
     protected override async Task OnInitializedAsync()
     {
-        //#if DEBUG
-        //        await Task.Delay(5000);
-        //#endif
-
-        //orderDetails = new List<OrderDetail>();
-        //details = new List<OrderDetail>();
-
+        selectedDetails = new ObservableCollection<OrderDetail>();
         products = await client.GetFromJsonAsync<List<Product>>("api/products");
     }
 
     public void RowSelectHandler(RowSelectEventArgs<Product> args)
     {
-        SelectDeseLect();
+        //if (args.IsHeaderCheckboxClicked) args.IsInteracted = false;
+        //else
+        //{
+        var product = products.First<Product>(p => p.ProductId == args.Data.ProductId);
+
+        detail = new OrderDetail()
+        {
+            ProductId = product.ProductId,
+            Discount = 0,
+            UnitPrice = product.UnitPrice.Value,
+            Quantity = 1
+        };
+        selectedDetails.Add(detail);
+        //}
+
     }
 
     public void RowDeselectHandler(RowDeselectEventArgs<Product> args)
     {
-        SelectDeseLect();
-    }
-    private void SelectDeseLect()
-    {
-        selectedProducts = productsGrid.SelectedRecords;
-
-        selectedDetails = selectedProducts.Select(detail => new OrderDetail()
+        if (productsGrid.SelectedRecords.Count == 0)
         {
-            ProductId = detail.ProductId,
-            Discount = 0,
-            UnitPrice = detail.UnitPrice.Value,
-            Quantity = 1
-        }).ToList();
+            selectedDetails.Clear();
+        }
+        else
+        {
+            int selected = args.Data.ProductId;
+            selectedDetails.Remove(selectedDetails.First<OrderDetail>(o => o.ProductId == selected));
+        }
     }
 }
 <style>
