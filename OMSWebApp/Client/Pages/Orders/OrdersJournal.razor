@@ -16,7 +16,7 @@
     }
     else
     {
-        <div class="card shadow">
+        <div class="shadow" style="cursor:pointer">
             <div class="card-body">
                 <h5>ORDERS JOURNAL</h5>
                 <SfGrid DataSource="@orders" AllowPaging="true" AllowSelection="true" EnableAltRow="true">
@@ -79,10 +79,6 @@
 
     protected override async Task OnInitializedAsync()
     {
-        //#if DEBUG
-        //        await Task.Delay(10000);
-        //#endif
-
         orders = await client.GetFromJsonAsync<List<Order>>("api/orders");
     }
 
@@ -105,9 +101,6 @@
         }).Sum(s => s.subtotal);
 
         totalOrder = String.Format("{0:F}", total);
-
-
-        //StateHasChanged();
     }
 }
 
@@ -122,6 +115,7 @@
         #grid > div {
             padding: .5em;
             text-align: left;
+            background-color:white;
         }
 </style>
 
