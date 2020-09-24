@@ -1,2 +1,2 @@
 # Orders Management System
-Demo BlazorWebAssembly project
+Demo Blazor WebAssembly project
