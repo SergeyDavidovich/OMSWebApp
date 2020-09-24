@@ -1,0 +1,54 @@
+﻿@page "/orders"
+
+@using Syncfusion.Blazor.Navigations
+@using OMSWebApp.Client.Components
+
+<div class="shadow" style="background-color:white; height:760px; padding:.5em">
+    <div>
+        <SfTab>
+            <TabItems>
+                <TabItem>
+                    <ContentTemplate>
+                        <OrdersJournal></OrdersJournal>
+                    </ContentTemplate>
+                    <ChildContent>
+                        <TabHeader Text="ORDERS JOURNAL"></TabHeader>
+                    </ChildContent>
+                    <ChildContent>
+                        <TabHeader Text="JOURNAL"></TabHeader>
+                    </ChildContent>
+                </TabItem>
+                <TabItem>
+                    <ContentTemplate>
+                        <SfTab EnablePersistence="true" LoadOn="ContentLoad.Demand" SelectedItem="1">
+                            <TabItems>
+                                <TabItem Content="WhatsApp Messenger is ">
+                                    <ChildContent>
+                                        <TabHeader Text="MAIN"></TabHeader>
+                                    </ChildContent>
+                                </TabItem>
+                                <TabItem>
+                                    <ChildContent>
+                                        <TabHeader Text="SELECT PRODUCTS"></TabHeader>
+                                    </ChildContent>
+                                    <ContentTemplate>
+                                        <ProductsSelector ></ProductsSelector>
+                                    </ContentTemplate>
+                                </TabItem>
+                                <TabItem Content="Facebook is an online social">
+                                    <ChildContent>
+                                        <TabHeader Text="SHIPPING"></TabHeader>
+                                    </ChildContent>
+                                </TabItem>
+                            </TabItems>
+                        </SfTab>
+                    </ContentTemplate>
+                    <ChildContent>
+                        <TabHeader Text="CREATE"></TabHeader>
+                    </ChildContent>
+                </TabItem>
+            </TabItems>
+        </SfTab>
+    </div>
+</div>
+
