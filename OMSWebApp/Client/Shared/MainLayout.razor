@@ -9,7 +9,7 @@
     </div>
 </div>
 
-<div class="main" style="background-color:lightgray">
+<div class="main" style="background-color:lavender">
     <div class="top-row px-4 shadow">
         <button type="button" class="btn btn-link ml-md-auto" @onclick="@LogoutClick">Logout</button>
     </div>
@@ -28,7 +28,7 @@
     {
         if (!(await AuthenticationState).User.Identity.IsAuthenticated)
         {
-            @*navigationManager.NavigateTo("/login");*@
+            //navigationManager.NavigateTo("/login");
         }
     }
 

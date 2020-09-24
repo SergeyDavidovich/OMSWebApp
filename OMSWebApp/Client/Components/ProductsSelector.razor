@@ -1,0 +1,140 @@
+﻿@using System.Collections.ObjectModel
+@using System.ComponentModel;
+@using Syncfusion.Blazor.Grids
+@using OMSWebApp.Shared.Models
+
+@inject HttpClient client
+
+<div id="grid">
+    <div>
+        <SfGrid Height="566" DataSource="@screenProducts" AllowPaging="false" AllowSelection="true" AllowFiltering="true" AllowGrouping="false"
+                EnableHover="false" Width="auto" AllowExcelExport="true" AllowPdfExport="true">
+            <GridSelectionSettings CheckboxMode="CheckboxSelectionType.Default" Type="SelectionType.Multiple" EnableToggle="true"></GridSelectionSettings>
+            <GridFilterSettings Mode="FilterBarMode.Immediate">
+            </GridFilterSettings>
+            <GridColumns>
+                <GridColumn Type="ColumnType.CheckBox" Width="30">
+                    <HeaderTemplate>
+                    </HeaderTemplate>
+                </GridColumn>
+                <GridColumn Field=@nameof(ScreenProduct.ProductId) HeaderText="ID"
+                            HeaderTextAlign="TextAlign.Center" TextAlign="TextAlign.Center" AutoFit="false" Width="50"></GridColumn>
+                <GridColumn Field=@nameof(ScreenProduct.ProductName) HeaderText="PRODUCT NAME"
+                            HeaderTextAlign="TextAlign.Left" TextAlign="TextAlign.Left" AutoFit="false" Width="260"></GridColumn>
+                <GridColumn Field=@nameof(ScreenProduct.CategoryName) HeaderText="CATEGORY"
+                            HeaderTextAlign="TextAlign.Center" TextAlign="TextAlign.Left" AutoFit="false" Width="160"></GridColumn>
+                <GridColumn Field=@nameof(ScreenProduct.UnitPrice) HeaderText="UNIT PRICE"
+                            HeaderTextAlign="TextAlign.Left" Format="N2" TextAlign="TextAlign.Right" AutoFit="false" Width="120"></GridColumn>
+                <GridColumn Field=@nameof(ScreenProduct.UnitsInStock) HeaderText="IN STOCK"
+                            HeaderTextAlign="TextAlign.Left" TextAlign="TextAlign.Center" AutoFit="false" Width="120"></GridColumn>
+            </GridColumns>
+            <GridEvents RowSelected="RowSelectedHandle" RowDeselected="RowDeselectedHandle" TValue="ScreenProduct"></GridEvents>
+        </SfGrid>
+    </div>
+    <div>
+        <SfGrid DataSource="@selectedDetails" EnableHover="false" Toolbar="@(new List<string>() { "Edit", "Cancel", "Update" })">
+            <GridEditSettings AllowEditing="true"></GridEditSettings>
+            <GridColumns>
+                <GridColumn Field=@nameof(OrderDetail.ProductId) HeaderText="PRODUCT ID" AllowEditing="false"
+                            HeaderTextAlign="TextAlign.Center" TextAlign="TextAlign.Center" AutoFit="false" Width="120"></GridColumn>
+                <GridColumn Field=@nameof(OrderDetail.ProductId) HeaderText="PRODUCT NAME" AllowEditing="false"
+                            HeaderTextAlign="TextAlign.Center" TextAlign="TextAlign.Center" AutoFit="false" Width="220"></GridColumn>
+                <GridColumn Field=@nameof(OrderDetail.UnitPrice) HeaderText="UNIT PRICE" AllowEditing="false"
+                            HeaderTextAlign="TextAlign.Left" Format="N2" TextAlign="TextAlign.Right" AutoFit="false" Width="120"></GridColumn>
+                <GridColumn Field=@nameof(OrderDetail.Quantity) HeaderText="QUANTITY" AllowEditing="true"
+                            HeaderTextAlign="TextAlign.Left" TextAlign="TextAlign.Left" AutoFit="false" Width="160"></GridColumn>
+                <GridColumn Field=@nameof(OrderDetail.Discount) HeaderText="DISCOUNT" AllowEditing="true"
+                            HeaderTextAlign="TextAlign.Left" TextAlign="TextAlign.Center" AutoFit="false" Width="120"></GridColumn>
+            </GridColumns>
+        </SfGrid>
+    </div>
+</div>
+
+<style>
+    #grid {
+        display: grid;
+        grid-template-columns: max-content max-content;
+        grid-gap: 1vw;
+        background-color: white;
+    }
+
+        #grid > div {
+            padding: .5em;
+            text-align: left;
+            background-color: white;
+            cursor: pointer;
+            height: 600px;
+        }
+
+    .datagrid {
+        height: 600px;
+    }
+</style>
+
+@code {
+
+    //[Parameter]
+    public List<Product> products { get; set; }
+
+    List<ScreenProduct> screenProducts;
+    ObservableCollection<OrderDetail> selectedDetails { get; set; }
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        products = await client.GetFromJsonAsync<List<Product>>("api/products");
+
+        selectedDetails = new ObservableCollection<OrderDetail>();
+
+        screenProducts = products.Select(p => new ScreenProduct()
+        {
+            ProductId = p.ProductId,
+            ProductName = p.ProductName,
+            CategoryName = p.Category.CategoryName,
+            UnitPrice = p.UnitPrice,
+            UnitsInStock = p.UnitsInStock
+        }).ToList<ScreenProduct>();
+    }
+
+    public void RowSelectedHandle(RowSelectEventArgs<ScreenProduct> args)
+    {
+        var selectedProduct = args.Data;
+
+
+        if (selectedDetails.FirstOrDefault(od => od.ProductId == selectedProduct.ProductId) == null)
+        {
+            var createdOrderDetail = new OrderDetail()
+            {
+                ProductId = selectedProduct.ProductId,
+                UnitPrice = selectedProduct.UnitPrice.Value,
+                Quantity = 1,
+                Discount = 0,
+                //Product = selectedProduct
+            };
+            selectedDetails.Add(createdOrderDetail);
+        }
+    }
+
+    public void RowDeselectedHandle(RowDeselectEventArgs<ScreenProduct> args)
+    {
+        var deselectedProduct = args.Data;
+
+        var deletedDetail = selectedDetails
+           .Where(d => d.ProductId == deselectedProduct.ProductId).SingleOrDefault<OrderDetail>();
+
+        if (selectedDetails.Count() != 0)
+        {
+            selectedDetails.Remove(deletedDetail);
+        }
+    }
+
+    public class ScreenProduct
+    {
+        public int ProductId { get; set; }
+        public string ProductName { get; set; }
+        public string CategoryName { get; set; }
+        public decimal? UnitPrice { get; set; }
+        public short? UnitsInStock { get; set; }
+
+    }
+}

@@ -4,9 +4,7 @@
 @using System.Collections.ObjectModel
 @using System.ComponentModel;
 @using Syncfusion.Blazor.Grids
-@using Syncfusion.Blazor.Buttons
 @using OMSWebApp.Shared.Models
-@using OMSWebApp.Client.Components
 
 @inject HttpClient client
 
@@ -48,9 +46,7 @@
             <GridEvents TValue="OrderDetail"></GridEvents>
         </SfGrid>
     </div>
-    <div class="shadow">
-        <Invoice Order="new Order() { OrderId=1}"></Invoice>
-    </div>
+    
 </div>
 
 @code {
