@@ -1,26 +1,15 @@
-﻿@*@layout OrdersLayout*@
-
-@*@page "/orders/ordersjournal"*@
-
-@using Syncfusion.Blazor.Grids
+﻿@using Syncfusion.Blazor.Grids
 @using OMSWebApp.Shared.Models
 @using OMSWebApp.Client.Components
 
 @inject HttpClient client
 
-
 <div id="grid">
-    @*@if (orders == null)
-        {
-            <p><em>Loading...</em></p>
-        }
-        else
-        {*@
     <div class="shadow" style="cursor:pointer">
         <div class="card-body">
-            <h5>ORDERS JOURNAL</h5>
-            <SfGrid DataSource="@orders" AllowPaging="true" AllowSelection="true" EnableAltRow="true">
+            <SfGrid DataSource="@orders" AllowPaging="true" AllowSelection="true" EnableAltRow="true" Height="600px">
                 <GridSelectionSettings Type="SelectionType.Single"></GridSelectionSettings>
+                <GridPageSettings PageCount="10"></GridPageSettings>
                 <GridColumns>
                     <GridColumn Field=@nameof(Order.OrderId) HeaderText="ORDER ID"
                                 HeaderTextAlign="TextAlign.Center" TextAlign="TextAlign.Center" AutoFit="false" Width="100"></GridColumn>
@@ -60,11 +49,26 @@
             </div>
         </div>
     </div>
-    @* } *@
 </div>
 
+<style>
+    #grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        grid-gap: 1vw;
+    }
+
+        #grid > div {
+            padding: .5em;
+            text-align: left;
+            background-color: white;
+            height: 740px;
+        }
+</style>
+
 @code {
-    #region Declarations
+    #region 
 
     List<Order> orders;
     List<OrderDetail> orderDetails;
@@ -74,8 +78,6 @@
     string orderDate;
     string employeeId;
     string totalOrder;
-    
-    #endregion
 
     protected override async Task OnInitializedAsync()
     {
@@ -102,22 +104,8 @@
 
         totalOrder = String.Format("{0:F}", total);
     }
+#endregion
 }
 
-<style>
-    #grid {
-        display: grid;
-        grid-template-columns: 2fr 1fr;
-        grid-template-rows: 1fr 1fr;
-        grid-gap: 1vw;
-    }
-
-        #grid > div {
-            padding: .5em;
-            text-align: left;
-            background-color:white;
-            height:700px;
-        }
-</style>
 
 

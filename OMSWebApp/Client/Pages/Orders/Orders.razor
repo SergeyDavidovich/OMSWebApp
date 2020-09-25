@@ -3,9 +3,9 @@
 @using Syncfusion.Blazor.Navigations
 @using OMSWebApp.Client.Components
 
-<div class="shadow" style="background-color:white; height:760px; padding:.5em">
+<div class="shadow" style="background-color:white; height:800px; padding:1.0em; border-top-left-radius:30px">
     <div>
-        <SfTab>
+        <SfTab EnablePersistence="true" LoadOn="ContentLoad.Demand">
             <TabItems>
                 <TabItem>
                     <ContentTemplate>
@@ -22,7 +22,7 @@
                     <ContentTemplate>
                         <SfTab EnablePersistence="true" LoadOn="ContentLoad.Demand" SelectedItem="1">
                             <TabItems>
-                                <TabItem Content="WhatsApp Messenger is ">
+                                <TabItem Content="MAIN TAB">
                                     <ChildContent>
                                         <TabHeader Text="MAIN"></TabHeader>
                                     </ChildContent>
@@ -32,10 +32,10 @@
                                         <TabHeader Text="SELECT PRODUCTS"></TabHeader>
                                     </ChildContent>
                                     <ContentTemplate>
-                                        <ProductsSelector ></ProductsSelector>
+                                        <ProductsSelector></ProductsSelector>
                                     </ContentTemplate>
                                 </TabItem>
-                                <TabItem Content="Facebook is an online social">
+                                <TabItem Content="SHIPMENT TAB">
                                     <ChildContent>
                                         <TabHeader Text="SHIPPING"></TabHeader>
                                     </ChildContent>

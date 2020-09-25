@@ -5,13 +5,16 @@
 
 <div class="sidebar">
     <div class="shadow">
-        <NavMenu />
+        <NavMenu OnClick="ClickHandler"/>
     </div>
 </div>
 
 <div class="main" style="background-color:lavender">
     <div class="top-row px-4 shadow">
-        <button type="button" class="btn btn-link ml-md-auto" @onclick="@LogoutClick">Logout</button>
+        <div id="grid-container">
+            <p id="message">@message</p>
+            <button type="button" class="btn btn-link ml-md-auto" @onclick="@LogoutClick">Logout</button>
+        </div>
     </div>
 
     <div class="content px-4">
@@ -28,7 +31,7 @@
     {
         if (!(await AuthenticationState).User.Identity.IsAuthenticated)
         {
-            //navigationManager.NavigateTo("/login");
+            navigationManager.NavigateTo("/login");
         }
     }
 
@@ -37,4 +40,22 @@
         await authStateProvider.Logout();
         navigationManager.NavigateTo("/login");
     }
+
+    string message = "Hello from ParentComponent";
+
+    void ClickHandler(string newMessage)
+    {
+        message = newMessage;
+    }
 }
+<style>
+    #grid-container{
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        padding:10px;
+    }
+    #message{
+        font-size:26px;
+        text-align:left
+    }
+</style>

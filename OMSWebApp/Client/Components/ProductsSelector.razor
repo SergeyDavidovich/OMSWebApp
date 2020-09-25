@@ -7,7 +7,7 @@
 
 <div id="grid">
     <div>
-        <SfGrid DataSource="@screenProducts" AllowPaging="false" AllowSelection="true" AllowFiltering="true" Height="100%">
+        <SfGrid Height="620px" DataSource="@screenProducts" AllowPaging="false" AllowSelection="true" AllowFiltering="true">
             <GridSelectionSettings CheckboxMode="CheckboxSelectionType.Default" Type="SelectionType.Multiple" EnableToggle="true"></GridSelectionSettings>
             <GridFilterSettings Mode="FilterBarMode.Immediate"></GridFilterSettings>
             <GridColumns>
@@ -30,7 +30,7 @@
         </SfGrid>
     </div>
     <div>
-        <SfGrid DataSource="@selectedDetails" EnableHover="false" Toolbar="@(new List<string>() { "Edit", "Cancel", "Update" })">
+        <SfGrid Height="620px" DataSource="@selectedDetails" EnableHover="false" Toolbar="@(new List<string>() { "Edit", "Cancel", "Update" })">
             <GridEditSettings AllowEditing="true"></GridEditSettings>
             <GridColumns>
                 <GridColumn Field=@nameof(ScreenOrderDetail.ProductId) HeaderText="PRODUCT ID" AllowEditing="false"
@@ -53,7 +53,7 @@
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-gap: 1vw;
-        background-color: white;
+        height:710px;
     }
 
         #grid > div {
@@ -61,12 +61,13 @@
             text-align: left;
             background-color: white;
             cursor: pointer;
-            height: 680px;
+            height: 710px;
         }
 </style>
 
 @code {
     #region
+
     public List<Product> products { get; set; }
 
     List<ScreenProduct> screenProducts;
