@@ -5,7 +5,7 @@
 @inject HttpClient client
 
 <div id="grid">
-    <div class="shadow" style="cursor:pointer">
+    <div class="shadow-sm" style="cursor:pointer">
         <div class="card-body">
             <SfGrid DataSource="@orders" AllowPaging="true" AllowSelection="true" EnableAltRow="true" Height="600px">
                 <GridSelectionSettings Type="SelectionType.Single"></GridSelectionSettings>
@@ -28,7 +28,7 @@
             </SfGrid>
         </div>
     </div>
-    <div class="card shadow">
+    <div class="card shadow-sm">
         <div class="card-body">
             <h5 class="card-title"><span>ORDER ID : </span><span class="font-weight-bold">@orderId</span></h5>
             <p class="card-text"><span>CUSTOMER ID: </span><span class="font-weight-bold">@customerId</span></p>
