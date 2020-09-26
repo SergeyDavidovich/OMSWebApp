@@ -9,7 +9,7 @@
         <div class="card-body">
             <SfGrid DataSource="@orders" AllowPaging="true" AllowSelection="true" EnableAltRow="true" Height="600px">
                 <GridSelectionSettings Type="SelectionType.Single"></GridSelectionSettings>
-                <GridPageSettings PageCount="10"></GridPageSettings>
+                <GridPageSettings PageCount="10" PageSize="14"></GridPageSettings>
                 <GridColumns>
                     <GridColumn Field=@nameof(Order.OrderId) HeaderText="ORDER ID"
                                 HeaderTextAlign="TextAlign.Center" TextAlign="TextAlign.Center" AutoFit="false" Width="100"></GridColumn>
@@ -55,7 +55,6 @@
     #grid {
         display: grid;
         grid-template-columns: 2fr 1fr;
-        grid-template-rows: 1fr 1fr;
         grid-gap: 1vw;
     }
 
@@ -63,7 +62,6 @@
             padding: .5em;
             text-align: left;
             background-color: white;
-            height: 740px;
         }
 </style>
 

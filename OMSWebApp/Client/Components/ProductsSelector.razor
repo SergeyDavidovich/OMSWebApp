@@ -31,7 +31,7 @@
     </div>
     <div>
         <SfGrid Height="620px" DataSource="@selectedDetails" EnableHover="false" Toolbar="@(new List<string>() { "Edit", "Cancel", "Update" })">
-            <GridEditSettings AllowEditing="true"></GridEditSettings>
+            <GridEditSettings AllowEditing="true" Mode="EditMode.Dialog"></GridEditSettings>
             <GridColumns>
                 <GridColumn Field=@nameof(ScreenOrderDetail.ProductId) HeaderText="PRODUCT ID" AllowEditing="false"
                             HeaderTextAlign="TextAlign.Center" TextAlign="TextAlign.Center" AutoFit="false" Width="120"></GridColumn>

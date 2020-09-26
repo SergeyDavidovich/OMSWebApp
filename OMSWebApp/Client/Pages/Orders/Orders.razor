@@ -22,7 +22,10 @@
                     <ContentTemplate>
                         <SfTab EnablePersistence="true" LoadOn="ContentLoad.Demand" SelectedItem="1">
                             <TabItems>
-                                <TabItem Content="MAIN TAB">
+                                <TabItem>
+                                    <ContentTemplate>
+                                        MAIN CONTENT
+                                    </ContentTemplate>
                                     <ChildContent>
                                         <TabHeader Text="MAIN"></TabHeader>
                                     </ChildContent>
@@ -35,7 +38,10 @@
                                         <ProductsSelector></ProductsSelector>
                                     </ContentTemplate>
                                 </TabItem>
-                                <TabItem Content="SHIPMENT TAB">
+                                <TabItem>
+                                    <ContentTemplate>
+                                        SHIPMENT CONTENT
+                                    </ContentTemplate>
                                     <ChildContent>
                                         <TabHeader Text="SHIPPING"></TabHeader>
                                     </ChildContent>

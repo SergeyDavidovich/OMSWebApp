@@ -4,13 +4,13 @@
 @inject CustomStateProvider authStateProvider
 
 <div class="sidebar">
-    <div class="shadow">
+    <div>
         <NavMenu OnClick="ClickHandler"/>
     </div>
 </div>
 
-<div class="main" style="background-color:lavender">
-    <div class="top-row px-4 shadow">
+<div class="main" style="background-color:cornflowerblue">
+    <div class="top-row px-4">
         <div id="grid-container">
             <p id="message">@message</p>
             <button type="button" class="btn btn-link ml-md-auto" @onclick="@LogoutClick">Logout</button>
