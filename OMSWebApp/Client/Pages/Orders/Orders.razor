@@ -5,7 +5,7 @@
 
 <div class="shadow-sm" style="background-color:white; height:800px; padding:1.0em; border-top-left-radius:30px">
     <div>
-        <SfTab EnablePersistence="true" LoadOn="ContentLoad.Demand">
+        <SfTab EnablePersistence="true" LoadOn="ContentLoad.Demand" SelectedItem="1">
             <TabItems>
                 <TabItem>
                     <ContentTemplate>
@@ -20,11 +20,13 @@
                 </TabItem>
                 <TabItem>
                     <ContentTemplate>
-                        <SfTab EnablePersistence="true" LoadOn="ContentLoad.Demand" SelectedItem="1">
+                        <SfTab EnablePersistence="true" LoadOn="ContentLoad.Demand" SelectedItem="0">
                             <TabItems>
                                 <TabItem>
                                     <ContentTemplate>
-                                        MAIN CONTENT
+                                        <OrdersMain>
+
+                                        </OrdersMain>
                                     </ContentTemplate>
                                     <ChildContent>
                                         <TabHeader Text="MAIN"></TabHeader>
