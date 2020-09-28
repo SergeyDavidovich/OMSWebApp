@@ -104,11 +104,45 @@ namespace OMSWebApp.Server.Controllers
             return salesByCountries;
         }
 
+        [Route("[action]")]
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<SalesByEmployee>>> GetSalesByEmployees()
+        {
+            var employees = await _context.Employees.Include(employee => employee.Orders).
+                ThenInclude(employeeOrder => employeeOrder.OrderDetails).
+                ToListAsync();
 
-        //public async Task<IEnumerable<object>> GetPurchacesByCustomers() { return null; }
+            return await Task.Run(() =>
+            {
+                var salesByEmployees = employees.Select(employee => new SalesByEmployee
+                {
+                    LastName = employee.LastName,
+                    SalesSum = employee.Orders.Sum(order => order.OrderDetails.Sum(orderDetail => orderDetail.Quantity * orderDetail.UnitPrice))
+                }).OrderBy(salesByEmployee => salesByEmployee.SalesSum).ToList();
 
-        //public async Task<IEnumerable<object>> GetSalesByEmployees() { return null; }
+                return salesByEmployees;
+            });
+        }
 
+        [Route("[action]")]
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<PurchasesByCustomer>>> GetPurchasesByCustomers()
+        {
+            var customers = await _context.Customers.Include(customer => customer.Orders).
+                ThenInclude(customerOrder => customerOrder.OrderDetails).
+                ToListAsync();
+
+            return await Task.Run(() =>
+            {
+                var purchasesByCustomers = customers.Select(customer => new PurchasesByCustomer
+                {
+                    CustomerName = customer.CompanyName,
+                    PurchaseSum = customer.Orders.Sum(order => order.OrderDetails.Sum(orderDetail => orderDetail.Quantity * orderDetail.UnitPrice))
+                }).OrderByDescending(purchasesByCustomer => purchasesByCustomer.PurchaseSum).Take(10).ToList();
+
+                return purchasesByCustomers;
+            });
+        }
 
 
         private bool OrderExists(int id)

@@ -178,19 +178,6 @@
                 </SfChart>
             </div>
         }
-        <div class="shadow">
-            <SfChart Height="200px">
-                <ChartPrimaryXAxis ValueType="Syncfusion.Blazor.Charts.ValueType.Category"></ChartPrimaryXAxis>
-                <ChartSeriesCollection>
-                    <ChartSeries DataSource="@MedalDetails1" Name="Gold" XName="Country" Width="2" Opacity="1" YName="Gold" Type="ChartSeriesType.Column">
-                    </ChartSeries>
-                    <ChartSeries DataSource="@MedalDetails1" Name="Silver" XName="Country" Width="2" Opacity="1" YName="Silver" Type="ChartSeriesType.Column">
-                    </ChartSeries>
-                    <ChartSeries DataSource="@MedalDetails1" Name="bronze" XName="Country" Width="2" Opacity="1" YName="Bronze" Type="ChartSeriesType.Column">
-                    </ChartSeries>
-                </ChartSeriesCollection>
-            </SfChart>
-        </div>
         @if (salesByCountries == null)
         {
             <p><em>Loading...</em></p>
@@ -201,7 +188,23 @@
                 <SfChart Width="100%" Height="200px">
                     <ChartPrimaryXAxis ValueType="Syncfusion.Blazor.Charts.ValueType.Category"></ChartPrimaryXAxis>
                     <ChartSeriesCollection>
-                        <ChartSeries DataSource="@salesByCountries" XName="CountryName" YName="CountrySum" ColumnSpacing="0.2" ColumnWidth="0.7" Type="ChartSeriesType.Bar">
+                        <ChartSeries DataSource="@salesByEmployees" XName="LastName" YName="SalesSum" ColumnSpacing="0.2" ColumnWidth="0.7" Type="ChartSeriesType.Bar">
+                        </ChartSeries>
+                    </ChartSeriesCollection>
+                </SfChart>
+            </div>
+        }
+        @if (salesByCountries == null)
+        {
+            <p><em>Loading...</em></p>
+        }
+        else
+        {
+            <div class="shadow">
+                <SfChart Width="100%" Height="200px">
+                    <ChartPrimaryXAxis ValueType="Syncfusion.Blazor.Charts.ValueType.Category"></ChartPrimaryXAxis>
+                    <ChartSeriesCollection>
+                        <ChartSeries DataSource="@purchasesByCustomers" XName="CustomerName" YName="PurchaseSum" ColumnSpacing="0.2" ColumnWidth="0.7" Type="ChartSeriesType.Bar">
                         </ChartSeries>
                     </ChartSeriesCollection>
                 </SfChart>
@@ -272,8 +275,9 @@
     List<CustomersByCountry> customersByCountries;
     List<ProductsByCategory> productsByCategories;
     List<SalesByCountry> salesByCountries;
+    List<SalesByEmployee> salesByEmployees;
+    List<PurchasesByCustomer> purchasesByCustomers;
 
-    //List<SalesByEmployee> salesByEmployee;
 
     protected override async Task OnInitializedAsync()
     {
@@ -284,46 +288,48 @@
         customersByCountries = await client.GetFromJsonAsync<List<CustomersByCountry>>("api/Statistics/GetCustomersByCountries");
         productsByCategories = await client.GetFromJsonAsync<List<ProductsByCategory>>("api/Statistics/GetProductsByCategories");
         salesByCountries = await client.GetFromJsonAsync<List<SalesByCountry>>("api/Statistics/GetSalesByCountries");
+        salesByEmployees = await client.GetFromJsonAsync<List<SalesByEmployee>>("api/Statistics/GetSalesByEmployees");
+        purchasesByCustomers = await client.GetFromJsonAsync<List<PurchasesByCustomer>>("api/Statistics/GetPurchasesByCustomers");
+
 
         totalOrders = ordersByCountry.Sum(o => o.OrdersCount);
-        //salesByEmployee = await client.GetFromJsonAsync<List<SalesByEmployee>>("api/Statistics/GetSalesByEmployees");
     }
 
-    public class ChartData
-    {
-        public string X;
-        public double YValue;
-        public double YValue1;
-    }
-    public List<ChartData> MedalDetails = new List<ChartData>
-{
-        new ChartData { X= "USA", YValue= 46, YValue1=56 },
-        new ChartData { X= "GBR", YValue= 27, YValue1=17 },
-        new ChartData { X= "CHN", YValue= 26, YValue1=36 },
-        new ChartData { X= "UK", YValue= 56,  YValue1=16 },
-        new ChartData { X= "AUS", YValue= 12, YValue1=46 },
-        new ChartData { X= "IND", YValue= 26, YValue1=16 },
-        new ChartData { X= "DEN", YValue= 26, YValue1=12 },
-        new ChartData { X= "MEX", YValue= 34, YValue1=32},
-    };
-    public class ChartData1
-    {
-        public string Country;
-        public double Gold;
-        public double Silver;
-        public double Bronze;
-    }
-    public List<ChartData1> MedalDetails1 = new List<ChartData1>
-{
-        new ChartData1{ Country= "USA", Gold=50, Silver=70, Bronze=45 },
-        new ChartData1{ Country="China", Gold=40, Silver= 60, Bronze=55 },
-        new ChartData1{ Country= "Japan", Gold=70, Silver= 60, Bronze=50 },
-        new ChartData1{ Country= "Australia", Gold=60, Silver= 56, Bronze=40 },
-        new ChartData1{ Country= "France", Gold=50, Silver= 45, Bronze=35 },
-        new ChartData1{ Country= "Germany", Gold=40, Silver=30, Bronze=22 },
-        new ChartData1{ Country= "Italy", Gold=40, Silver=35, Bronze=37 },
-        new ChartData1{ Country= "Sweden", Gold=30, Silver=25, Bronze=27 }
-    };
+    //    public class ChartData
+    //    {
+    //        public string X;
+    //        public double YValue;
+    //        public double YValue1;
+    //    }
+    //    public List<ChartData> MedalDetails = new List<ChartData>
+    //{
+    //        new ChartData { X= "USA", YValue= 46, YValue1=56 },
+    //        new ChartData { X= "GBR", YValue= 27, YValue1=17 },
+    //        new ChartData { X= "CHN", YValue= 26, YValue1=36 },
+    //        new ChartData { X= "UK", YValue= 56,  YValue1=16 },
+    //        new ChartData { X= "AUS", YValue= 12, YValue1=46 },
+    //        new ChartData { X= "IND", YValue= 26, YValue1=16 },
+    //        new ChartData { X= "DEN", YValue= 26, YValue1=12 },
+    //        new ChartData { X= "MEX", YValue= 34, YValue1=32},
+    //    };
+    //    public class ChartData1
+    //    {
+    //        public string Country;
+    //        public double Gold;
+    //        public double Silver;
+    //        public double Bronze;
+    //    }
+    //    public List<ChartData1> MedalDetails1 = new List<ChartData1>
+    //{
+    //        new ChartData1{ Country= "USA", Gold=50, Silver=70, Bronze=45 },
+    //        new ChartData1{ Country="China", Gold=40, Silver= 60, Bronze=55 },
+    //        new ChartData1{ Country= "Japan", Gold=70, Silver= 60, Bronze=50 },
+    //        new ChartData1{ Country= "Australia", Gold=60, Silver= 56, Bronze=40 },
+    //        new ChartData1{ Country= "France", Gold=50, Silver= 45, Bronze=35 },
+    //        new ChartData1{ Country= "Germany", Gold=40, Silver=30, Bronze=22 },
+    //        new ChartData1{ Country= "Italy", Gold=40, Silver=35, Bronze=37 },
+    //        new ChartData1{ Country= "Sweden", Gold=30, Silver=25, Bronze=27 }
+    //    };
 
     bool ShowLegend = false;
     public void AnimationHandler(IAccAnimationCompleteEventArgs args)
