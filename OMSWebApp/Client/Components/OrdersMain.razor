@@ -6,6 +6,7 @@
 
 
 <div id="grid-ordersmain">
+    <fieldset style="margin:30px;">
     <div>
         <SfDatePicker TValue="DateTime?" Placeholder="Choose a Date" Format="dd-MMM-yy"></SfDatePicker>
     </div>
@@ -40,6 +41,7 @@
     <div>
         <SfDatePicker TValue="DateTime?" Placeholder="Choose a Date" Format="dd-MMM-yy"></SfDatePicker>
     </div>
+        </fieldset>
 </div>
 
 <style>
@@ -48,6 +50,7 @@
         grid-template-columns: 1fr 1fr 1fr;
         grid-template-rows: 1fr 1fr 1fr;
         grid-gap:10px;
+        max-height:600px;
     }
 
         #grid > div {

@@ -8,33 +8,33 @@
 
 @inject HttpClient client
 
-<div id="grid-main">
+<div id="grid-dashboard">
     <div id="grid-cards">
-        <div class="shadow-sm">
+        <div class="shadow">
             <div class="cardtitle">OVERALL ORDERS QUANTITY</div>
             <div id="cardcontent">3455</div>
             <hr style="height:0; background-color:lightgray" />
             <div id="cardfooter">(for @currenYear year)</div>
         </div>
-        <div class="shadow-sm">
+        <div class="shadow">
             <div class="cardtitle">MAX CHECK</div>
             <div id="cardcontent">$ 5345.56</div>
             <hr style="height:0; background-color:lightgray" />
             <div id="cardfooter">(for @currenYear year)</div>
         </div>
-        <div class="shadow-sm">
+        <div class="shadow">
             <div class="cardtitle">MAX CHECK</div>
             <div id="cardcontent">$ 5345.56</div>
             <hr style="height:0; background-color:lightgray" />
             <div id="cardfooter">(for @currenYear year)</div>
         </div>
-        <div class="shadow-sm">
+        <div class="shadow">
             <div class="cardtitle">MAX CHECK</div>
             <div id="cardcontent">$ 5345.56</div>
             <hr style="height:0; background-color:lightgray" />
             <div id="cardfooter">(for @currenYear year)</div>
         </div>
-        <div class="shadow-sm">
+        <div class="shadow">
             <div class="cardtitle">MAX CHECK</div>
             <div id="cardcontent">$ 5345.56</div>
             <hr style="height:0; background-color:lightgray" />
@@ -42,14 +42,14 @@
         </div>
     </div>
 
-    <div id="grid-graphs">
+    <div id="grid-accumulategraphs">
         @if (ordersByCountry == null)
         {
             <p><em>Loading...</em></p>
         }
         else
         {
-            <div class="shadow-sm">
+            <div class="shadow">
                 <SfAccumulationChart Title="ORDERS BY COUNTRIES (TOP 10)" EnableAnimation="false" EnableSmartLabels="true">
                     <AccumulationChartAnnotations>
                         <AccumulationChartAnnotation X="50%" Y="44%" CoordinateUnits="Units.Pixel" Region="Regions.Chart">
@@ -80,7 +80,7 @@
         }
         else
         {
-            <div class="shadow-sm">
+            <div class="shadow">
                 <SfAccumulationChart Title="SALES BY CATEGORIES" EnableAnimation="false" EnableSmartLabels="true">
                     <AccumulationChartSeriesCollection>
                         <AccumulationChartSeries DataSource="@salesByCategories" XName="CategoryName" YName="SalesSum" Name="Category" ExplodeOffset="22" Explode="true" InnerRadius="0">
@@ -101,7 +101,7 @@
         }
         else
         {
-            <div class="shadow-sm">
+            <div class="shadow">
                 <SfAccumulationChart Title="CUSTOMERS BY COUNTRIES" EnableAnimation="false" EnableSmartLabels="true">
                     <AccumulationChartAnnotations>
                         <AccumulationChartAnnotation X="66%" Y="18%" CoordinateUnits="Units.Pixel" Region="Regions.Chart">
@@ -114,8 +114,8 @@
                         </AccumulationChartAnnotation>
                     </AccumulationChartAnnotations>
                     <AccumulationChartSeriesCollection>
-                        <AccumulationChartSeries DataSource="@customersByCountries" XName="CountryName" YName="CustomerCount" Name="Country" ExplodeOffset="22" Explode="true" InnerRadius="30"
-                                                 StartAngle="270" EndAngle="90">
+                        <AccumulationChartSeries DataSource="@customersByCountries" XName="CountryName" YName="CustomerCount" Name="Country" ExplodeOffset="22" Explode="true"
+                                                 InnerRadius="30" StartAngle="270" EndAngle="90">
                             <AccumulationDataLabelSettings Visible="true" Name="users" Position="AccumulationLabelPosition.Inside">
                                 <AccumulationChartDataLabelFont FontWeight="600"></AccumulationChartDataLabelFont>
                             </AccumulationDataLabelSettings>
@@ -133,7 +133,7 @@
         }
         else
         {
-            <div class="shadow-sm">
+            <div class="shadow">
                 <SfAccumulationChart Title="PRODUCTS BY CATEGORIES" EnableAnimation="false" EnableSmartLabels="true">
                     <AccumulationChartAnnotations>
                         <AccumulationChartAnnotation X="66%" Y="18%" CoordinateUnits="Units.Pixel" Region="Regions.Chart">
@@ -159,6 +159,9 @@
                 </SfAccumulationChart>
             </div>
         }
+    </div>
+
+    <div id="grid-bargraphs">
         @if (salesByCountries == null)
         {
             <p><em>Loading...</em></p>
@@ -166,19 +169,17 @@
         else
         {
             <div id="item1" class="shadow">
-                <SfChart Width="100%">
+                <SfChart Width="100%" Height="200px">
                     <ChartPrimaryXAxis ValueType="Syncfusion.Blazor.Charts.ValueType.Category"></ChartPrimaryXAxis>
                     <ChartSeriesCollection>
                         <ChartSeries DataSource="@salesByCountries" XName="CountryName" YName="CountrySum" ColumnSpacing="0.2" ColumnWidth="0.7" Type="ChartSeriesType.Bar">
                         </ChartSeries>
-                        @*<ChartSeries DataSource="@MedalDetails" XName="X" YName="YValue1" ColumnSpacing="0.2" ColumnWidth="0.2" Type="ChartSeriesType.Area">
-                            </ChartSeries>*@
                     </ChartSeriesCollection>
                 </SfChart>
             </div>
         }
-        <div id="item2" class="shadow-sm">
-            <SfChart>
+        <div class="shadow">
+            <SfChart Height="200px">
                 <ChartPrimaryXAxis ValueType="Syncfusion.Blazor.Charts.ValueType.Category"></ChartPrimaryXAxis>
                 <ChartSeriesCollection>
                     <ChartSeries DataSource="@MedalDetails1" Name="Gold" XName="Country" Width="2" Opacity="1" YName="Gold" Type="ChartSeriesType.Column">
@@ -190,58 +191,54 @@
                 </ChartSeriesCollection>
             </SfChart>
         </div>
+        @if (salesByCountries == null)
+        {
+            <p><em>Loading...</em></p>
+        }
+        else
+        {
+            <div class="shadow">
+                <SfChart Width="100%" Height="200px">
+                    <ChartPrimaryXAxis ValueType="Syncfusion.Blazor.Charts.ValueType.Category"></ChartPrimaryXAxis>
+                    <ChartSeriesCollection>
+                        <ChartSeries DataSource="@salesByCountries" XName="CountryName" YName="CountrySum" ColumnSpacing="0.2" ColumnWidth="0.7" Type="ChartSeriesType.Bar">
+                        </ChartSeries>
+                    </ChartSeriesCollection>
+                </SfChart>
+            </div>
+        }
     </div>
 </div>
 
 <style>
-    #grid-main {
+    #grid-dashboard {
         display: grid;
         background-color: cornflowerblue;
-        grid-template-rows: auto auto;
-        grid-gap: 20px;
+        grid-template-rows: .3fr 1fr auto;
+        grid-gap: 10px;
+        height: calc(100vh - 100px);
+        overflow: auto;
     }
-
     #grid-cards {
         display: grid;
-        grid-row: 1;
         grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-        grid-gap: 20px;
+        grid-gap: 10px;
     }
-
         #grid-cards > div {
             padding: 10px;
             background-color: white;
             height: auto;
         }
-
-    #grid-graphs {
+    #grid-accumulategraphs {
         display: grid;
-        grid-row: 2;
         grid-template-columns: 1fr 1fr 1fr 1fr;
-        grid-template-rows: 1fr 1fr;
-        grid-gap: 20px;
+        grid-gap: 10px;
     }
-
-        #grid-graphs > div {
-            padding: 20px;
-            text-align: center;
-            background-color: white;
-        }
-
-    #item1 {
-        grid-row-start: 2;
-        grid-row-end: 2;
-        grid-column-start: 1;
-        grid-column-end: 3;
+    #grid-bargraphs {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-column-gap: 10px;
     }
-
-    #item2 {
-        grid-row-start: 2;
-        grid-row-end: 2;
-        grid-column-start: 3;
-        grid-column-end: 5;
-    }
-
     #cardtitle {
         font-size: 16px;
         text-align: left;
@@ -266,6 +263,8 @@
 
 @code
 {
+    #region
+
     int currenYear;
     int totalOrders;
     List<OrdersByCountry> ordersByCountry;
@@ -274,15 +273,10 @@
     List<ProductsByCategory> productsByCategories;
     List<SalesByCountry> salesByCountries;
 
-
     //List<SalesByEmployee> salesByEmployee;
 
     protected override async Task OnInitializedAsync()
     {
-        //#if DEBUG
-        //        await Task.Delay(10000);
-        //#endif
-
         currenYear = DateTime.Now.Year;
 
         ordersByCountry = await client.GetFromJsonAsync<List<OrdersByCountry>>("api/statistics/GetOrdersByCountries");
@@ -293,9 +287,6 @@
 
         totalOrders = ordersByCountry.Sum(o => o.OrdersCount);
         //salesByEmployee = await client.GetFromJsonAsync<List<SalesByEmployee>>("api/Statistics/GetSalesByEmployees");
-
-
-
     }
 
     public class ChartData
@@ -339,4 +330,5 @@
     {
         ShowLegend = true;
     }
+    #endregion
 }
