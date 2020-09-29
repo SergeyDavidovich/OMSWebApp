@@ -9,11 +9,12 @@
     </div>
 </div>
 
-<div class="main" style="background-color:cornflowerblue">
-    <div class="top-row px-4">
+<div class="main" style="background-color:cornflowerblue;">
+    <div class="top-row px-4" style="background-color: #1861ac">
         <div id="grid-container">
-            <p id="message">@message</p>
-            <button type="button" class="btn btn-link ml-md-auto" @onclick="@LogoutClick">Logout</button>
+            <span id="message">@message</span>
+            <button type="button" class="btn btn-link ml-md-auto" @onclick="@LogoutClick" 
+                    style="color:white">Logout</button>
         </div>
     </div>
 
@@ -52,11 +53,13 @@
     #grid-container{
         display:grid;
         grid-template-columns:1fr 1fr;
-        padding:10px;
+        padding:0px;
+        width:100%;
     }
     #message{
-        font-size:26px;
+        font-size:22px;
         text-align:left;
-        vertical-align:auto;
+        vertical-align:middle;
+        color:white;
     }
 </style>

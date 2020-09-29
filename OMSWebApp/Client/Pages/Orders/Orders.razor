@@ -3,60 +3,58 @@
 @using Syncfusion.Blazor.Navigations
 @using OMSWebApp.Client.Components
 
-<div class="shadow-sm" style="background-color:white; height:800px; padding:1.0em; border-top-left-radius:30px">
-    <div>
-        <SfTab EnablePersistence="true" LoadOn="ContentLoad.Demand" SelectedItem="1">
-            <TabItems>
-                <TabItem>
-                    <ContentTemplate>
-                        <OrdersJournal></OrdersJournal>
-                    </ContentTemplate>
-                    <ChildContent>
-                        <TabHeader Text="ORDERS JOURNAL"></TabHeader>
-                    </ChildContent>
-                    <ChildContent>
-                        <TabHeader Text="JOURNAL"></TabHeader>
-                    </ChildContent>
-                </TabItem>
-                <TabItem>
-                    <ContentTemplate>
-                        <SfTab EnablePersistence="true" LoadOn="ContentLoad.Demand" SelectedItem="0">
-                            <TabItems>
-                                <TabItem>
-                                    <ContentTemplate>
-                                        <OrdersMain>
+<div class="shadow" style="background-color:white; height:calc(100vh-30px); padding:1.0em; border-top-left-radius:30px">
+    <SfTab EnablePersistence="true" LoadOn="ContentLoad.Demand" SelectedItem="1">
+        <TabItems>
+            <TabItem>
+                <ChildContent>
+                    <TabHeader Text="ORDERS JOURNAL"></TabHeader>
+                </ChildContent>
+                <ChildContent>
+                    <TabHeader Text="JOURNAL"></TabHeader>
+                </ChildContent>
+                <ContentTemplate>
+                    <OrdersJournal></OrdersJournal>
+                </ContentTemplate>
+            </TabItem>
+            <TabItem>
+                <ContentTemplate>
+                    <SfTab EnablePersistence="true" LoadOn="ContentLoad.Demand" SelectedItem="0">
+                        <TabItems>
+                            <TabItem>
+                                <ContentTemplate>
+                                    <OrdersMain>
 
-                                        </OrdersMain>
-                                    </ContentTemplate>
-                                    <ChildContent>
-                                        <TabHeader Text="MAIN"></TabHeader>
-                                    </ChildContent>
-                                </TabItem>
-                                <TabItem>
-                                    <ChildContent>
-                                        <TabHeader Text="SELECT PRODUCTS"></TabHeader>
-                                    </ChildContent>
-                                    <ContentTemplate>
-                                        <ProductsSelector></ProductsSelector>
-                                    </ContentTemplate>
-                                </TabItem>
-                                <TabItem>
-                                    <ContentTemplate>
-                                        SHIPMENT CONTENT
-                                    </ContentTemplate>
-                                    <ChildContent>
-                                        <TabHeader Text="SHIPPING"></TabHeader>
-                                    </ChildContent>
-                                </TabItem>
-                            </TabItems>
-                        </SfTab>
-                    </ContentTemplate>
-                    <ChildContent>
-                        <TabHeader Text="CREATE"></TabHeader>
-                    </ChildContent>
-                </TabItem>
-            </TabItems>
-        </SfTab>
-    </div>
+                                    </OrdersMain>
+                                </ContentTemplate>
+                                <ChildContent>
+                                    <TabHeader Text="MAIN"></TabHeader>
+                                </ChildContent>
+                            </TabItem>
+                            <TabItem>
+                                <ChildContent>
+                                    <TabHeader Text="SELECT PRODUCTS"></TabHeader>
+                                </ChildContent>
+                                <ContentTemplate>
+                                    <ProductsSelector></ProductsSelector>
+                                </ContentTemplate>
+                            </TabItem>
+                            <TabItem>
+                                <ContentTemplate>
+                                    SHIPMENT CONTENT
+                                </ContentTemplate>
+                                <ChildContent>
+                                    <TabHeader Text="SHIPPING"></TabHeader>
+                                </ChildContent>
+                            </TabItem>
+                        </TabItems>
+                    </SfTab>
+                </ContentTemplate>
+                <ChildContent>
+                    <TabHeader Text="CREATE"></TabHeader>
+                </ChildContent>
+            </TabItem>
+        </TabItems>
+    </SfTab>
 </div>
 

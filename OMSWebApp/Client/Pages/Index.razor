@@ -2,12 +2,11 @@
 
 <AuthorizeView>
     <Authorized>
-        <div style="background-color:blue; color:white; padding:10px; border-radius:10px; width:30%;" class="shadow">
-            <h1>Hello @context.User.Identity.Name!</h1>
-            <p>Welcome to Order Management System</p>
+        <div class="shadow" style="background-color:#808080; color:white; padding:10px; border-radius:10px; width:30%;">
+            <h3>Hello @context.User.Identity.Name!</h3>
+            <h4>Welcome to Order Management System</h4>
         </div>
     </Authorized>
-
     <Authorizing>
         <h1 style="color:white">Loading ...</h1>
     </Authorizing>
