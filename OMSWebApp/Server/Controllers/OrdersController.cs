@@ -63,7 +63,7 @@ namespace OMSWebService.Controllers
 
         // POST: api/orders
         [HttpPost]
-        public async Task<ActionResult<Order>> PostProduct([FromBody] Order order)
+        public async Task<ActionResult<Order>> PostOrder([FromBody] Order order)
         {
             _context.Orders.Add(order);
 

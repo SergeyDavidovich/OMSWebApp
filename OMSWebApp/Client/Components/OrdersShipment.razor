@@ -1,4 +1,65 @@
-﻿
+﻿@using OMSWebApp.Shared.Models
+@using OMSWebApp.Client.Components
+@using Syncfusion.Blazor.Calendars
+
+@inject HttpClient client
+
+<div id="grid-ordersmain">
+    <fieldset style="margin:30px;">
+        <div>
+            <SfDatePicker TValue="DateTime?" Placeholder="Choose a Date" Format="dd-MMM-yy"></SfDatePicker>
+        </div>
+        <div>
+            <SfDatePicker TValue="DateTime?" Placeholder="Choose a Date" Format="dd-MMM-yy"></SfDatePicker>
+        </div>
+
+        <div>
+            <SfDatePicker TValue="DateTime?" Placeholder="Choose a Date" Format="dd-MMM-yy"></SfDatePicker>
+        </div>
+
+        <div>
+            <SfDatePicker TValue="DateTime?" Placeholder="Choose a Date" Format="dd-MMM-yy"></SfDatePicker>
+        </div>
+
+        <div>
+            <SfDatePicker TValue="DateTime?" Placeholder="Choose a Date" Format="dd-MMM-yy"></SfDatePicker>
+        </div>
+
+        <div>
+            <SfDatePicker TValue="DateTime?" Placeholder="Choose a Date" Format="dd-MMM-yy"></SfDatePicker>
+        </div>
+
+        <div>
+            <SfDatePicker TValue="DateTime?" Placeholder="Choose a Date" Format="dd-MMM-yy"></SfDatePicker>
+        </div>
+
+        <div>
+            <SfDatePicker TValue="DateTime?" Placeholder="Choose a Date" Format="dd-MMM-yy"></SfDatePicker>
+        </div>
+
+        <div>
+            <SfDatePicker TValue="DateTime?" Placeholder="Choose a Date" Format="dd-MMM-yy"></SfDatePicker>
+        </div>
+    </fieldset>
+</div>
+
+<style>
+    #grid-ordersmain {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+        grid-gap: 10px;
+        max-height: 600px;
+    }
+
+    #grid > div {
+        padding: 20px;
+        max-width: 260px;
+        height: 80px;
+        background-color: lavender
+    }
+</style>
+
 @code {
 
 }

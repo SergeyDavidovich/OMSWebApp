@@ -2,6 +2,9 @@
 
 @using Syncfusion.Blazor.Navigations
 @using OMSWebApp.Client.Components
+@using OMSWebApp.Shared.Models
+
+@inject HttpClient client
 
 <div class="shadow" style="background-color:white; height:calc(100vh-30px); padding:1.0em; border-top-left-radius:30px">
     <SfTab EnablePersistence="true" LoadOn="ContentLoad.Demand" SelectedItem="1">
@@ -23,9 +26,7 @@
                         <TabItems>
                             <TabItem>
                                 <ContentTemplate>
-                                    <OrdersMain>
-
-                                    </OrdersMain>
+                                    <OrdersMain @ref="orderMain"></OrdersMain>
                                 </ContentTemplate>
                                 <ChildContent>
                                     <TabHeader Text="MAIN"></TabHeader>
@@ -36,16 +37,16 @@
                                     <TabHeader Text="SELECT PRODUCTS"></TabHeader>
                                 </ChildContent>
                                 <ContentTemplate>
-                                    <ProductsSelector></ProductsSelector>
+                                    <ProductsSelector @ref="productSelector" ></ProductsSelector>
                                 </ContentTemplate>
                             </TabItem>
                             <TabItem>
-                                <ContentTemplate>
-                                    SHIPMENT CONTENT
-                                </ContentTemplate>
                                 <ChildContent>
                                     <TabHeader Text="SHIPPING"></TabHeader>
                                 </ChildContent>
+                                <ContentTemplate>
+                                    <OrdersShipment></OrdersShipment>
+                                </ContentTemplate>
                             </TabItem>
                         </TabItems>
                     </SfTab>
@@ -58,3 +59,23 @@
     </SfTab>
 </div>
 
+@code
+{
+    Order order;
+    OrdersMain orderMain;
+    ProductsSelector productSelector;
+    OrdersShipment ordersShipment;
+
+    protected override Task OnInitializedAsync()
+    {
+        return base.OnInitializedAsync();
+    }
+
+    private async Task SaveOrder()
+    {
+        await client.PostAsJsonAsync("", new Order()
+        {
+            //OrderDetails=productSelector.products, 
+        });
+    }
+}
