@@ -87,7 +87,6 @@ namespace OMSWebApp.Server.Controllers
             return productsByCategories;
         }
 
-
         //GET: api/Statistics/GetSalesByCountries
         [Route("[action]")]
         [HttpGet]
@@ -143,7 +142,6 @@ namespace OMSWebApp.Server.Controllers
                 return purchasesByCustomers;
             });
         }
-
 
         private bool OrderExists(int id)
         {

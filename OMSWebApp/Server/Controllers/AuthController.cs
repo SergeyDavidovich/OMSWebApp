@@ -43,8 +43,10 @@ namespace OMSWebApp.Server.Controllers
         {
             var user = new ApplicationUser();
             user.UserName = parameters.UserName;
+
             var result = await _userManager.CreateAsync(user, parameters.Password);
             if (!result.Succeeded) return BadRequest(result.Errors.FirstOrDefault()?.Description);
+
             return await Login(new LoginRequest
             {
                 UserName = parameters.UserName,
@@ -69,6 +71,7 @@ namespace OMSWebApp.Server.Controllers
                 UserName = User.Identity.Name,
                 Claims = User.Claims
                 .ToDictionary(c => c.Type, c => c.Value)
+                
             };
         }
     }

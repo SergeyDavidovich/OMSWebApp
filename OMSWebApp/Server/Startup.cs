@@ -30,7 +30,7 @@ namespace OMSWebApp.Server
             string sql_connection = Configuration.GetConnectionString("SQLServerConnection");
             services.AddDbContext<ApplicationDBContext>(options => options.UseSqlServer(sql_connection));
 
-            //string sqlite_connection = Configuration.GetConnectionString("SQLiteConnection");
+            string sqlite_connection = Configuration.GetConnectionString("SQLiteConnection");
             //services.AddDbContext<ApplicationDBContext>(options => options.UseSqlite(sqlite_connection));
 
             string sqlite_identity_connection = Configuration.GetConnectionString("SQLiteIdentityConnection");
@@ -43,6 +43,14 @@ namespace OMSWebApp.Server
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<IdentityContext>();
 
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequiredLength = 1;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+            }
+            );
             services.ConfigureApplicationCookie(options =>
             {
                 options.Cookie.HttpOnly = false;

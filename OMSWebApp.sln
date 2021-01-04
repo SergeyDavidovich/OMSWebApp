@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OMSWebApp.Client", "OMSWebA
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OMSWebApp.Shared", "OMSWebApp\Shared\OMSWebApp.Shared.csproj", "{BC426AF0-2370-4DAC-A843-DCAF42C66165}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{503829DF-AF8D-458B-AB01-29CA14DD5A59}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
