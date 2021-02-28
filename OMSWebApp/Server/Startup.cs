@@ -30,7 +30,7 @@ namespace OMSWebApp.Server
             string sql_connection = Configuration.GetConnectionString("SQLServerConnection");
             services.AddDbContext<ApplicationDBContext>(options => options.UseSqlServer(sql_connection));
 
-            string sqlite_connection = Configuration.GetConnectionString("SQLiteConnection");
+            //string sqlite_connection = Configuration.GetConnectionString("SQLiteConnection");
             //services.AddDbContext<ApplicationDBContext>(options => options.UseSqlite(sqlite_connection));
 
             string sqlite_identity_connection = Configuration.GetConnectionString("SQLiteIdentityConnection");

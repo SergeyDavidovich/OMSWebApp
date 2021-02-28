@@ -9,30 +9,30 @@
 <h1 class="h2 font-weight-normal login-title">
     Login
 </h1>
-    <EditForm class="form-signin" OnValidSubmit="OnSubmit" Model="loginRequest">
-        <DataAnnotationsValidator />
+<EditForm class="form-signin" OnValidSubmit="OnSubmit" Model="loginRequest">
+    <DataAnnotationsValidator />
 
-        <label for="inputUsername" class="sr-only">User Name</label>
-        <InputText id="inputUsername" class="form-control" @bind-Value="loginRequest.UserName" autofocus placeholder="Username" />
-        <ValidationMessage For="@(() => loginRequest.UserName)" />
+    <label for="inputUsername" class="sr-only">User Name</label>
+    <InputText id="inputUsername" class="form-control" @bind-Value="loginRequest.UserName" autofocus placeholder="Username" />
+    <ValidationMessage For="@(() => loginRequest.UserName)" />
 
-        <label for="inputPassword" class="sr-only">Password</label>
-        <InputText type="password" id="inputPassword" class="form-control" placeholder="Password" @bind-Value="loginRequest.Password" />
-        <ValidationMessage For="@(() => loginRequest.Password)" />
+    <label for="inputPassword" class="sr-only">Password</label>
+    <InputText type="password" id="inputPassword" class="form-control" placeholder="Password" @bind-Value="loginRequest.Password" />
+    <ValidationMessage For="@(() => loginRequest.Password)" />
 
-        <div class="form-check m-3">
-            <InputCheckbox id="inputRememberMe" class="form-check-input" @bind-Value="@loginRequest.RememberMe" />
-            <label class="form-check-label" for="inputRememberMe">Remember Me</label>
-        </div>
+    <div class="form-check m-3">
+        <InputCheckbox id="inputRememberMe" class="form-check-input" @bind-Value="@loginRequest.RememberMe" />
+        <label class="form-check-label" for="inputRememberMe">Remember Me</label>
+    </div>
 
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
 
-        <label class="text-danger">@error</label>
-
-        <NavLink href="register">
-            <h6 class="font-weight-normal text-center">Create account</h6>
-        </NavLink>
-    </EditForm>
+    <label class="text-danger">@error</label>
+    <NavLink href="register">
+        <h6 class="font-weight-normal text-center">Create account</h6>
+    </NavLink>
+    <p style="font-size:small; text-align:right">login: alisa, password: alisa</p>
+</EditForm>
 
 @code{
     LoginRequest loginRequest { get; set; } = new LoginRequest();
